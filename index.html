@@ -57,7 +57,7 @@ a{color:var(--navy)}
 /* ---------- Layout ---------- */
 .wrap{max-width:1240px;margin:0 auto;padding:28px 24px 96px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px}
 .wrap>*{min-width:0}
-.files{position:sticky;top:96px;align-self:start}
+.files{position:sticky;top:calc(var(--header-h,72px) + 16px);align-self:start}
 .files h2{font:600 13px var(--body);color:var(--muted);margin:0 0 10px}
 .files ol{list-style:none;margin:0;padding:0;counter-reset:f}
 .files li a{display:flex;gap:10px;align-items:baseline;padding:7px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:15px}
@@ -73,7 +73,7 @@ body.plus .files .stat{opacity:1}
 .open p.sub{font-size:19px;color:var(--muted);max-width:62ch;margin:0}
 
 /* ---------- File (section) ---------- */
-.file{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:28px;scroll-margin-top:96px;overflow:hidden}
+.file{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:28px;scroll-margin-top:calc(var(--header-h,72px) + 16px);overflow:hidden}
 .file-head{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--page)}
 .file-head code{font:400 13px var(--mono);color:var(--muted)}
 .file-head .ask{margin-left:auto;font-size:13px;color:var(--muted)}
@@ -114,7 +114,7 @@ body.plus .plus-layer{display:block}
 .step{all:unset;cursor:pointer;padding:14px;border:1px solid var(--line);border-right:0;background:var(--page)}
 .step:last-child{border-right:1px solid var(--line);border-radius:0 8px 8px 0}
 .step:first-child{border-radius:8px 0 0 8px}
-.step[aria-selected="true"]{background:var(--navy-bg);box-shadow:inset 0 -3px 0 var(--navy)}
+.step[aria-pressed="true"]{background:var(--navy-bg);box-shadow:inset 0 -3px 0 var(--navy)}
 .step .k{font:700 12px var(--mono);color:var(--muted)}
 .step .n{display:block;font-weight:700}
 .step-detail{margin-top:12px;padding:14px 16px;border-radius:8px;background:var(--page);border:1px solid var(--line)}
@@ -126,6 +126,7 @@ body.plus .plus-layer{display:block}
 .person .role{font-weight:700;display:block}
 .person .tag{font-size:13px;color:var(--muted)}
 .person .tag.champ{color:var(--add)} .person .tag.block{color:var(--risk)}
+.timeline button:focus-visible,.step:focus-visible,.person:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
 .person-detail{margin-top:10px;padding:14px 16px;border-radius:8px;border:1px solid var(--line);font-size:15px}
 
 /* discovery */
@@ -255,13 +256,13 @@ body.presenting .present-bar{display:flex}
       <div class="file-body">
         <h3>Where Greptile fits</h3>
         <p class="q">Land small inside the governance wall, then let usage outgrow the commit. Step through the path.</p>
-        <div class="path" role="tablist" aria-label="Land and expand path">
-          <button class="step" role="tab" aria-selected="true" data-step="0"><span class="k">Land</span><span class="n">Brex engineering</span></button>
-          <button class="step" role="tab" aria-selected="false" data-step="1"><span class="k">Standardize</span><span class="n">AI DevEx team</span></button>
-          <button class="step" role="tab" aria-selected="false" data-step="2"><span class="k">Expand</span><span class="n">Hopper + Discover</span></button>
-          <button class="step" role="tab" aria-selected="false" data-step="3"><span class="k">Enterprise</span><span class="n">Bank-wide commit</span></button>
+        <div class="path" role="group" aria-label="Land and expand path">
+          <button class="step" type="button" aria-pressed="true" aria-controls="step-detail" data-step="0"><span class="k">Land</span><span class="n">Brex engineering</span></button>
+          <button class="step" type="button" aria-pressed="false" aria-controls="step-detail" data-step="1"><span class="k">Standardize</span><span class="n">AI DevEx team</span></button>
+          <button class="step" type="button" aria-pressed="false" aria-controls="step-detail" data-step="2"><span class="k">Expand</span><span class="n">Hopper + Discover</span></button>
+          <button class="step" type="button" aria-pressed="false" aria-controls="step-detail" data-step="3"><span class="k">Enterprise</span><span class="n">Bank-wide commit</span></button>
         </div>
-        <div class="step-detail" id="step-detail" role="tabpanel" aria-live="polite"></div>
+        <div class="step-detail" id="step-detail" aria-live="polite"></div>
         <div class="plus-layer" aria-label="Additions">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Review for code you inherited.</strong> Each acquisition is a repeatable land with its own leader and urgency. <span class="draft">draft</span></p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>Shadow-mode pilot.</strong> Greptile reviews quietly for 30 days; the findings become the business case. <span class="draft">draft</span></p></div>
@@ -420,7 +421,7 @@ body.presenting .present-bar{display:flex}
   ];
   var detail=document.getElementById('step-detail');
   function showStep(i){
-    document.querySelectorAll('.step').forEach(function(s,j){s.setAttribute('aria-selected',String(i===j));});
+    document.querySelectorAll('.step').forEach(function(s,j){s.setAttribute('aria-pressed',String(i===j));});
     detail.innerHTML=steps[i];
   }
   document.querySelectorAll('.step').forEach(function(s,i){s.addEventListener('click',function(){showStep(i);});});
@@ -452,7 +453,7 @@ body.presenting .present-bar{display:flex}
     {q:"Does Brex still run its own GitHub org and tooling?",y:"Brex is the land. Self-serve trial can start this month.",n:"Shift the land to Hopper's travel team or Capital One Software."},
     {q:"Can code leave Capital One's network for review?",y:"Cloud deployment; fastest path to a pilot.",n:"Self-hosted from day one; bring the FDE into the first technical call."},
     {q:"Is the in-house code quality team building a PR reviewer?",y:"Position Greptile as the base they build on, and run a head-to-head eval.",n:"Build-vs-buy fades; focus on speed to value."},
-    {q:"Who owns the AI coding tools budget?",y:"DevEx owns it: champion and buyer sit close together, shorter cycle.",n:"Map the path to the platform or CTO org early; plan for a longer cycle."}
+    {q:"Does DevEx own the AI coding tools budget?",y:"DevEx owns it: champion and buyer sit close together, shorter cycle.",n:"Map the path to the platform or CTO org early; plan for a longer cycle."}
   ];
   var ql=document.getElementById('qs');
   qs.forEach(function(item){
@@ -518,12 +519,25 @@ body.presenting .present-bar{display:flex}
   document.getElementById('next').addEventListener('click',function(){go(idx+1);});
   document.addEventListener('keydown',function(e){
     if(!body.classList.contains('presenting'))return;
-    if(e.target.matches('input,textarea'))return;
-    if(e.key==='ArrowRight'||e.key===' ')go(idx+1);
+    if(dlg.open)return; // the objections dialog owns Escape and its own keys
+    if(e.target.closest('input,textarea,select'))return;
+    var onControl=e.target.closest('button,a,summary');
+    var handled=true;
+    if(e.key==='ArrowRight')go(idx+1);
     else if(e.key==='ArrowLeft')go(idx-1);
+    else if(e.key===' '&&!onControl)go(idx+1); // Space on a button activates that button instead
     else if(e.key==='Escape')stopPresenting();
-    else if(e.key==='p'){var m=!body.classList.contains('plus');document.querySelector('.switch [data-mode="'+(m?'plus':'fund')+'"]').click();}
+    else if(e.key==='p'||e.key==='P'){var m=!body.classList.contains('plus');document.querySelector('.switch [data-mode="'+(m?'plus':'fund')+'"]').click();}
+    else handled=false;
+    if(handled)e.preventDefault();
   });
+
+  // Keep scroll offsets in step with the sticky header, which wraps to several rows on phones
+  var header=document.querySelector('.pr');
+  function syncHeader(){document.documentElement.style.setProperty('--header-h',header.offsetHeight+'px');}
+  syncHeader();
+  if('ResizeObserver' in window)new ResizeObserver(syncHeader).observe(header);
+  else window.addEventListener('resize',syncHeader);
 })();
 </script>
 </body>
