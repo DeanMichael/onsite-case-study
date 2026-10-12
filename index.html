@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Win Capital One</title>
+<meta name="description" content="Greptile AE onsite: an account plan for Capital One, presented as a pull request.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@75..150,500..900&family=DM+Sans:opsz,wght@9..40,400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#F4F6F3; --surface:#FFFFFF; --ink:#1A2420; --muted:#5B6A63; --line:#D7DDD8;
+  --add:#1E7A4C; --add-bg:#DCF1E3; --add-line:#9FD3B4;
+  --risk:#A8432E; --risk-bg:#F7E3DD;
+  --navy:#22446A; --navy-bg:#E3EAF2;
+  --focus:#22446A;
+  --display:"Anybody",system-ui,sans-serif; --body:"DM Sans",system-ui,sans-serif; --mono:"Space Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#141A17; --surface:#1B2320; --ink:#E7EDE9; --muted:#9AAAA2; --line:#2E3934;
+    --add:#7FD3A2; --add-bg:#173326; --add-line:#2C5E44;
+    --risk:#E8957F; --risk-bg:#3A221B; --navy:#9DBCE0; --navy-bg:#1D2A38; --focus:#9DBCE0;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--page);color:var(--ink);font:400 17px/1.55 var(--body)}
+a{color:var(--navy)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+
+/* ---------- PR header ---------- */
+.pr{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.pr-inner{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.pr-title{margin:0;font:800 clamp(22px,2.6vw,30px)/1.05 var(--display);font-stretch:118%;letter-spacing:-.01em}
+.pr-title .num{color:var(--muted);font-weight:500}
+.pr-id{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pr-meta{color:var(--muted);font-size:14px}
+.pr-meta strong{color:var(--add);font-weight:700}
+.spacer{flex:1}
+.switch{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--page)}
+.switch button{font:600 14px var(--body);border:0;background:transparent;color:var(--muted);padding:7px 14px;border-radius:999px;cursor:pointer}
+.switch button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.switch button[data-mode="plus"][aria-pressed="true"]{background:var(--add-bg);color:var(--add);box-shadow:0 0 0 1px var(--add-line)}
+.btn{font:600 14px var(--body);border:1px solid var(--ink);background:var(--ink);color:var(--page);padding:8px 16px;border-radius:8px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1240px;margin:0 auto;padding:28px 24px 96px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px}
+.wrap>*{min-width:0}
+.files{position:sticky;top:96px;align-self:start}
+.files h2{font:600 13px var(--body);color:var(--muted);margin:0 0 10px}
+.files ol{list-style:none;margin:0;padding:0;counter-reset:f}
+.files li a{display:flex;gap:10px;align-items:baseline;padding:7px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:15px}
+.files li a::before{counter-increment:f;content:counter(f);font:700 12px var(--mono);color:var(--muted);width:14px}
+.files li a:hover,.files li a[aria-current="true"]{background:var(--surface)}
+.files li a[aria-current="true"]{box-shadow:inset 3px 0 0 var(--add)}
+.files .stat{margin-left:auto;font:400 11px var(--mono);color:var(--add);opacity:0;transition:opacity .2s}
+body.plus .files .stat{opacity:1}
+
+/* ---------- Opening ---------- */
+.open{grid-column:1/-1;padding:36px 0 8px;max-width:900px}
+.open p.lead{font:800 clamp(30px,4.6vw,58px)/1.02 var(--display);font-stretch:105%;letter-spacing:-.02em;margin:0 0 18px}
+.open p.sub{font-size:19px;color:var(--muted);max-width:62ch;margin:0}
+
+/* ---------- File (section) ---------- */
+.file{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:28px;scroll-margin-top:96px;overflow:hidden}
+.file-head{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--page)}
+.file-head code{font:400 13px var(--mono);color:var(--muted)}
+.file-head .ask{margin-left:auto;font-size:13px;color:var(--muted)}
+.file-body{padding:26px 28px 30px}
+.file h3{font:800 clamp(24px,2.4vw,32px)/1.1 var(--display);font-stretch:112%;margin:0 0 6px;letter-spacing:-.01em}
+.file .q{color:var(--muted);margin:0 0 22px;max-width:70ch}
+.file h4{font:700 17px var(--body);margin:22px 0 8px}
+.file p,.file li{max-width:72ch}
+
+/* diff layers */
+.plus-layer{display:none;margin-top:22px;border:1px solid var(--add-line);border-radius:8px;background:var(--add-bg)}
+body.plus .plus-layer{display:block}
+.plus-layer .diff-row{display:grid;grid-template-columns:28px 1fr;padding:12px 16px 12px 0}
+.plus-layer .diff-row+.diff-row{border-top:1px dashed var(--add-line)}
+.plus-layer .gutter{font:700 15px var(--mono);color:var(--add);text-align:center;padding-top:1px}
+.plus-layer p{margin:0}
+.plus-layer strong{color:var(--add)}
+.fund-note{font-size:14px;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+
+/* review comment (Greptile-style) */
+.review{margin-top:18px;border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;background:var(--page)}
+.review .who{font:700 13px var(--mono)}
+.review .conf{font:400 12px var(--mono);color:var(--muted)}
+.review p{grid-column:1/-1;margin:0;font-size:15px}
+
+/* timeline */
+.timeline{list-style:none;margin:14px 0 0;padding:0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 16px 22px}
+.timeline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--navy)}
+.timeline button{all:unset;cursor:pointer;display:block}
+.timeline .when{font:700 13px var(--mono);color:var(--navy)}
+.timeline .what{font-weight:600}
+.timeline .detail{display:none;color:var(--muted);font-size:15px;margin-top:4px}
+.timeline li.open .detail{display:block}
+
+/* land path */
+.path{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:14px}
+.step{all:unset;cursor:pointer;padding:14px;border:1px solid var(--line);border-right:0;background:var(--page)}
+.step:last-child{border-right:1px solid var(--line);border-radius:0 8px 8px 0}
+.step:first-child{border-radius:8px 0 0 8px}
+.step[aria-selected="true"]{background:var(--navy-bg);box-shadow:inset 0 -3px 0 var(--navy)}
+.step .k{font:700 12px var(--mono);color:var(--muted)}
+.step .n{display:block;font-weight:700}
+.step-detail{margin-top:12px;padding:14px 16px;border-radius:8px;background:var(--page);border:1px solid var(--line)}
+
+/* stakeholders */
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:14px}
+.person{all:unset;cursor:pointer;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--page)}
+.person[aria-expanded="true"]{border-color:var(--navy);background:var(--navy-bg)}
+.person .role{font-weight:700;display:block}
+.person .tag{font-size:13px;color:var(--muted)}
+.person .tag.champ{color:var(--add)} .person .tag.block{color:var(--risk)}
+.person-detail{margin-top:10px;padding:14px 16px;border-radius:8px;border:1px solid var(--line);font-size:15px}
+
+/* discovery */
+.qs{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.qs li{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--page)}
+.qs .qt{font-weight:700;margin:0 0 8px}
+.qs .ans{display:inline-flex;gap:6px}
+.qs .ans button{font:600 13px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer}
+.qs .ans button[aria-pressed="true"]{background:var(--ink);color:var(--page);border-color:var(--ink)}
+.qs .impact{margin:10px 0 0;font-size:15px;color:var(--muted)}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:14px}
+.calc label{display:block;font-size:15px;margin-bottom:14px}
+.calc input[type=range]{width:100%;accent-color:var(--navy)}
+.calc output{font:700 15px var(--mono)}
+.calc .result{border:1px solid var(--line);border-radius:8px;padding:16px;background:var(--page)}
+.calc .big{font:800 34px/1 var(--display);font-stretch:110%}
+.calc .row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.calc small{color:var(--muted);display:block;margin-top:10px;font-size:13px}
+
+.draft{display:inline-block;font:400 12px var(--mono);color:var(--risk);background:var(--risk-bg);padding:1px 7px;border-radius:4px;margin-left:6px;vertical-align:middle}
+
+/* objections drawer */
+dialog{border:1px solid var(--line);border-radius:12px;max-width:640px;width:calc(100% - 32px);background:var(--surface);color:var(--ink);padding:0}
+dialog::backdrop{background:rgba(20,26,23,.45)}
+dialog header{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line)}
+dialog h2{margin:0;font:800 22px var(--display);font-stretch:112%}
+dialog .body{padding:6px 18px 18px}
+dialog details{border-bottom:1px solid var(--line);padding:12px 0}
+dialog summary{cursor:pointer;font-weight:700}
+
+/* ---------- Presenter mode ---------- */
+body.presenting .files,body.presenting .open{display:none}
+body.presenting .wrap{grid-template-columns:1fr;max-width:1100px}
+body.presenting .file{display:none;min-height:calc(100vh - 140px);font-size:20px}
+body.presenting .file.current{display:block}
+body.presenting .file-body{padding:40px 48px}
+.present-bar{display:none;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 8px;gap:6px;align-items:center;z-index:30;font:400 13px var(--mono)}
+body.presenting .present-bar{display:flex}
+.present-bar button{border:0;background:var(--page);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer;font:600 13px var(--body)}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:16px}
+  .files{position:static}
+  .files ol{display:flex;overflow-x:auto;gap:4px}
+  .files li a{white-space:nowrap}
+  .path{grid-template-columns:1fr 1fr}
+  .step,.step:first-child,.step:last-child{border:1px solid var(--line);border-radius:0}
+  .calc{grid-template-columns:1fr}
+  .file-body{padding:20px 18px 24px}
+  .file-head .ask{display:none}
+  .pr-inner{gap:12px}
+  .spacer{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="pr">
+  <div class="pr-inner">
+    <div class="pr-id">
+      <h1 class="pr-title">Win Capital One <span class="num">#1</span></h1>
+      <span class="pr-meta">Dean Sibrizzi wants to merge <strong>8 files</strong> into Greptile's enterprise motion</span>
+    </div>
+    <span class="spacer"></span>
+    <div class="switch" role="group" aria-label="View">
+      <button type="button" data-mode="fund" aria-pressed="true">Fundamentals</button>
+      <button type="button" data-mode="plus" aria-pressed="false">Fundamentals + plus</button>
+    </div>
+    <button type="button" class="btn ghost" id="objections-open">Objections</button>
+    <button type="button" class="btn" id="present">Present</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="open" aria-label="Opening">
+    <p class="lead">The prompt tests sales fundamentals. Here they are, plus what I'd add.</p>
+    <p class="sub">At the pace AI is moving, fundamentals are the floor. Flip the switch above to see the additions on every part, shown the way Greptile would show them: as a diff.</p>
+  </section>
+
+  <nav class="files" aria-label="Changed files">
+    <h2>Files changed</h2>
+    <ol>
+      <li><a href="#why-now">Why now<span class="stat">+3</span></a></li>
+      <li><a href="#fit">Where Greptile fits<span class="stat">+2</span></a></li>
+      <li><a href="#who">Who matters<span class="stat">+1</span></a></li>
+      <li><a href="#unknowns">What I don't know<span class="stat">+1</span></a></li>
+      <li><a href="#sequence">The sequence<span class="stat">+2</span></a></li>
+      <li><a href="#meeting">The first meeting<span class="stat">+1</span></a></li>
+      <li><a href="#prove">Prove it<span class="stat">+2</span></a></li>
+      <li><a href="#champion">Win a champion<span class="stat">+1</span></a></li>
+    </ol>
+  </nav>
+
+  <div class="files-content">
+
+    <!-- 1 -->
+    <article class="file" id="why-now">
+      <div class="file-head"><code>plan/01-why-now.md</code><span class="ask">Part 1 · Strategic account plan</span></div>
+      <div class="file-body">
+        <h3>Why Capital One, why now</h3>
+        <p class="q">Capital One is integrating three acquisitions while it pushes AI coding across one of the largest engineering orgs in banking. Click an event to see the detail and the source.</p>
+        <ol class="timeline">
+          <li><button type="button"><span class="when">May 2025</span> <span class="what">Discover acquisition closes</span></button>
+            <div class="detail">Years of migration work onto Capital One's stack, including data centers and mainframes. <a href="https://www.bankingdive.com/news/capital-one-readies-for-discover-integration-work/746131/" target="_blank" rel="noopener">Banking Dive</a></div></li>
+          <li><button type="button"><span class="when">Apr 2026</span> <span class="what">Brex acquisition closes</span></button>
+            <div class="detail">An AI-native engineering org whose CTO says over 45% of code changes are fully AI-written. <a href="https://www.capitalone.com/about/newsroom/capital-one-completes-acquisition-of-brex/" target="_blank" rel="noopener">Capital One newsroom</a> · <a href="https://cursor.com/customers/upwork" target="_blank" rel="noopener">Cursor customers</a></div></li>
+          <li><button type="button"><span class="when">Apr 2026</span> <span class="what">Hopper travel tech brought in-house</span></button>
+            <div class="detail">About 150 Hopper employees and the platform behind Capital One Travel. <a href="https://skift.com/?p=807849" target="_blank" rel="noopener">Skift</a></div></li>
+          <li><button type="button"><span class="when">Jul 2026</span> <span class="what">AI DevEx hiring: make AI code review the enterprise default</span></button>
+            <div class="detail">A stated priority with a named team. <a href="https://www.capitalonecareers.com/job/mclean/senior-manager-product-management-developer-experience-ai-coding-tools/1732/98489984496" target="_blank" rel="noopener">Capital One careers</a></div></li>
+          <li><button type="button"><span class="when">Jul 2026</span> <span class="what">VulnHunter open-sourced</span></button>
+            <div class="detail">The CISO org's agentic code-security tool, built around reducing false positives. <a href="https://capitalone.com/tech/open-source/announcing-vulnhunter/" target="_blank" rel="noopener">Capital One Tech</a></div></li>
+        </ol>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Three codebases nobody at Capital One wrote.</strong> Brex, Hopper and Discover all need review by engineers who lack context on the code. That's the problem Greptile's codebase graph solves. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>The CISO already speaks our language.</strong> VulnHunter's pitch is fewer false positives; Greptile averages about 1.5 comments per PR. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Research method.</strong> Built from postings, filings and public repos in an afternoon with AI, then checked by hand. <span class="draft">draft</span></p></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="file" id="fit">
+      <div class="file-head"><code>plan/02-where-greptile-fits.md</code><span class="ask">Part 1 · Land and expand</span></div>
+      <div class="file-body">
+        <h3>Where Greptile fits</h3>
+        <p class="q">Land small inside the governance wall, then let usage outgrow the commit. Step through the path.</p>
+        <div class="path" role="tablist" aria-label="Land and expand path">
+          <button class="step" role="tab" aria-selected="true" data-step="0"><span class="k">Land</span><span class="n">Brex engineering</span></button>
+          <button class="step" role="tab" aria-selected="false" data-step="1"><span class="k">Standardize</span><span class="n">AI DevEx team</span></button>
+          <button class="step" role="tab" aria-selected="false" data-step="2"><span class="k">Expand</span><span class="n">Hopper + Discover</span></button>
+          <button class="step" role="tab" aria-selected="false" data-step="3"><span class="k">Enterprise</span><span class="n">Bank-wide commit</span></button>
+        </div>
+        <div class="step-detail" id="step-detail" role="tabpanel" aria-live="polite"></div>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Review for code you inherited.</strong> Each acquisition is a repeatable land with its own leader and urgency. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Shadow-mode pilot.</strong> Greptile reviews quietly for 30 days; the findings become the business case. <span class="draft">draft</span></p></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="file" id="who">
+      <div class="file-head"><code>plan/03-who-matters.md</code><span class="ask">Part 1 · Multi-threading</span></div>
+      <div class="file-body">
+        <h3>Who matters</h3>
+        <p class="q">Click a person to see what they care about and how I reach them.</p>
+        <div class="people" id="people"></div>
+        <div class="person-detail" id="person-detail" aria-live="polite">Select a person above.</div>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Turn the blocker into the ally.</strong> Security usually slows AI tools down. Here, the CISO org just shipped one. <span class="draft">draft</span></p></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4 -->
+    <article class="file" id="unknowns">
+      <div class="file-head"><code>plan/04-what-i-dont-know.md</code><span class="ask">Part 1 · Discovery</span></div>
+      <div class="file-body">
+        <h3>What I don't know</h3>
+        <p class="q">Five questions for discovery. Pick an answer and see how the plan changes.</p>
+        <ul class="qs" id="qs"></ul>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>A plan built to be wrong.</strong> Every assumption has a fallback, so a bad answer changes the route instead of killing the deal. <span class="draft">draft</span></p></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="file" id="sequence">
+      <div class="file-head"><code>outbound/05-sequence.md</code><span class="ask">Part 2 · Outbound</span></div>
+      <div class="file-body">
+        <h3>The sequence</h3>
+        <p class="q">Who I reach first, three touches, and the first message in full. <span class="draft">to write</span></p>
+        <p class="fund-note">Placeholder: touch timeline and first-message mock go here.</p>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Lead with their code.</strong> The first touch carries what Greptile found on a public Capital One repo. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Check the card swipes first.</strong> Look for existing self-serve usage from Capital One and Brex domains before any cold outreach. <span class="draft">draft</span></p></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="file" id="meeting">
+      <div class="file-head"><code>outbound/06-first-meeting.md</code><span class="ask">Part 2 · First meeting</span></div>
+      <div class="file-body">
+        <h3>The first meeting</h3>
+        <p class="q">The structure, what I leave with, and the next step we both agree to. <span class="draft">to write</span></p>
+        <p class="fund-note">Placeholder: timed agenda and "leave with" checklist go here.</p>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Confirm, don't ask.</strong> Research turns discovery into checking hypotheses, which frees half the meeting for their code. <span class="draft">draft</span></p></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="file" id="prove">
+      <div class="file-head"><code>demo/07-prove-it.md</code><span class="ask">Part 3 · Show, don't tell</span></div>
+      <div class="file-body">
+        <h3>Prove it</h3>
+        <p class="q">Build versus buy, using Capital One's own posted salaries. Move the sliders.</p>
+        <div class="calc">
+          <div>
+            <label>Engineers to build and maintain an internal reviewer: <output id="o-eng">3</output>
+              <input type="range" id="i-eng" min="1" max="10" value="3"></label>
+            <label>Loaded cost per engineer: <output id="o-sal">$250k</output>
+              <input type="range" id="i-sal" min="180" max="400" step="10" value="250"></label>
+            <label>Monthly inference for the internal tool: <output id="o-inf">$20k</output>
+              <input type="range" id="i-inf" min="0" max="100" step="5" value="20"></label>
+          </div>
+          <div class="result" aria-live="polite">
+            <div class="row"><span>Build, per year</span><strong id="r-build"></strong></div>
+            <div class="row"><span>Greptile minimum commit</span><strong>$25,000</strong></div>
+            <div style="margin-top:14px">Building costs</div>
+            <div class="big" id="r-mult"></div>
+            <small>Salary range anchored to Capital One's posted bands ($179k to $335k base). Inference and commit size are placeholders until discovery. <span class="draft">draft</span></small>
+          </div>
+        </div>
+        <div class="review">
+          <span class="who">greptile-bot</span><span class="conf">confidence 4/5</span>
+          <p>Placeholder: a Greptile review from a public Capital One PR goes here, linked to the original. <span class="draft">to add</span></p>
+        </div>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>This site was reviewed by Greptile.</strong> Every change went through a PR on GitHub. The reviews are public. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>VulnHunter's repo, reviewed.</strong> Greptile on the CISO's own open-source project. <span class="draft">draft</span></p></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 8 -->
+    <article class="file" id="champion">
+      <div class="file-head"><code>demo/08-win-a-champion.md</code><span class="ask">Part 3 · Champion</span></div>
+      <div class="file-body">
+        <h3>Win a champion</h3>
+        <p class="q">How one meeting turns one person into an internal seller. <span class="draft">to write</span></p>
+        <p class="fund-note">Placeholder: champion kit with audience switch (CISO, VP Eng, CFO) goes here.</p>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Give them the deck they'd write.</strong> The champion leaves with a forwardable page built on their own team's numbers. <span class="draft">draft</span></p></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>
+
+<div class="present-bar" aria-label="Presenter controls">
+  <button type="button" id="prev">Back</button>
+  <span id="pos">1 / 8</span>
+  <button type="button" id="next">Next</button>
+  <button type="button" id="exit">Exit</button>
+</div>
+
+<dialog id="objections" aria-labelledby="obj-title">
+  <header><h2 id="obj-title">Objections</h2><button type="button" class="btn ghost" id="objections-close">Close</button></header>
+  <div class="body">
+    <details><summary>"We'll build it ourselves."</summary><p>Building is the easy part. The cost is maintenance, evals and inference management, every month, by engineers who could ship product. <span class="draft">draft</span></p></details>
+    <details><summary>"Copilot already reviews our PRs."</summary><p>The tool that writes the code shouldn't be the only one checking it. Greptile runs a different model than the one that wrote the change. <span class="draft">draft</span></p></details>
+    <details><summary>"Security won't let our code leave."</summary><p>Greptile offers a self-hosted option where the bank runs its own inference. <span class="draft">confirm with FDE</span></p></details>
+    <details><summary>"AI review is too noisy."</summary><p>About 1.5 comments per PR versus about 4 for CodeRabbit, plus a confidence score on each. <span class="draft">draft</span></p></details>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var body=document.body;
+
+  // Fundamentals / plus switch
+  document.querySelectorAll('.switch button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var plus=b.dataset.mode==='plus';
+      body.classList.toggle('plus',plus);
+      document.querySelectorAll('.switch button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});
+    });
+  });
+
+  // Timeline
+  document.querySelectorAll('.timeline button').forEach(function(b){
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click',function(){
+      var li=b.parentElement, open=li.classList.toggle('open');
+      b.setAttribute('aria-expanded',String(open));
+    });
+  });
+
+  // Land path
+  var steps=[
+    "<strong>Brex engineering.</strong> AI-native, heavy Cursor use, and likely outside the bank's heaviest governance. Customer gains: review that keeps pace with AI-written code. Commit: $25k to start.",
+    "<strong>AI DevEx team.</strong> Owns AI coding tools and is chartered to make AI code review the enterprise default. Customer gains: a measured quality signal on every AI-written PR.",
+    "<strong>Hopper travel team and Discover integration.</strong> Inherited codebases where reviewers lack context. Customer gains: blast-radius checks across systems they didn't build.",
+    "<strong>Bank-wide commit.</strong> Usage outgrows the first commit; the renewal consolidates teams. Customer gains: one independent review layer across every coding tool."
+  ];
+  var detail=document.getElementById('step-detail');
+  function showStep(i){
+    document.querySelectorAll('.step').forEach(function(s,j){s.setAttribute('aria-selected',String(i===j));});
+    detail.innerHTML=steps[i];
+  }
+  document.querySelectorAll('.step').forEach(function(s,i){s.addEventListener('click',function(){showStep(i);});});
+  showStep(0);
+
+  // Stakeholders
+  var people=[
+    {role:"Sr. Manager, AI DevEx",tag:"Champion",cls:"champ",d:"Owns AI coding tools and must prove their ROI. Greptile gives that team the quality data it's chartered to produce. Reach: an insight on AI-written PR quality, then a shadow-mode pilot offer."},
+    {role:"Brex CTO",tag:"Land sponsor",cls:"champ",d:"Runs a team where over 45% of code changes are AI-written. Cares about shipping speed without regressions. Reach: what Greptile catches on AI-heavy PRs."},
+    {role:"Head of Enterprise Platforms / CTO org",tag:"Economic buyer",cls:"",d:"Signs the enterprise commit. Cares about integration risk across Discover, Brex and Hopper. Reach: through the champion, with the inherited-code story. Name to confirm in discovery."},
+    {role:"CISO org",tag:"Potential blocker",cls:"block",d:"Will review data handling and model use. Already invested in AI code security via VulnHunter. Reach: position Greptile beside VulnHunter, with the self-hosted option."},
+    {role:"Lead AI Engineer, code quality",tag:"Potential blocker",cls:"block",d:"Hired to build AI code-quality tools in-house. Reach: make Greptile the layer that team builds on, so it adds to their mandate instead of competing with it."}
+  ];
+  var wrap=document.getElementById('people'), pd=document.getElementById('person-detail');
+  people.forEach(function(p,i){
+    var b=document.createElement('button');
+    b.type='button';b.className='person';b.setAttribute('aria-expanded','false');
+    b.innerHTML='<span class="role">'+p.role+'</span><span class="tag '+p.cls+'">'+p.tag+'</span>';
+    b.addEventListener('click',function(){
+      wrap.querySelectorAll('.person').forEach(function(x){x.setAttribute('aria-expanded',String(x===b));});
+      pd.textContent=p.d;
+    });
+    wrap.appendChild(b);
+  });
+
+  // Discovery questions
+  var qs=[
+    {q:"Is Copilot the main AI coding tool at Capital One?",y:"Lead with independence: a different model checks what Copilot writes.",n:"Find out which tool, and adjust the model-inversion story to match."},
+    {q:"Does Brex still run its own GitHub org and tooling?",y:"Brex is the land. Self-serve trial can start this month.",n:"Shift the land to Hopper's travel team or Capital One Software."},
+    {q:"Can code leave Capital One's network for review?",y:"Cloud deployment; fastest path to a pilot.",n:"Self-hosted from day one; bring the FDE into the first technical call."},
+    {q:"Is the in-house code quality team building a PR reviewer?",y:"Position Greptile as the base they build on, and run a head-to-head eval.",n:"Build-vs-buy fades; focus on speed to value."},
+    {q:"Who owns the AI coding tools budget?",y:"DevEx owns it: champion and buyer sit close together, shorter cycle.",n:"Map the path to the platform or CTO org early; plan for a longer cycle."}
+  ];
+  var ql=document.getElementById('qs');
+  qs.forEach(function(item){
+    var li=document.createElement('li');
+    li.innerHTML='<p class="qt">'+item.q+'</p><div class="ans" role="group" aria-label="Answer"><button type="button">Yes</button><button type="button">No</button></div><p class="impact">Pick an answer to see how the plan changes.</p>';
+    var btns=li.querySelectorAll('.ans button'), impact=li.querySelector('.impact');
+    btns.forEach(function(b,k){
+      b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',function(){
+        btns.forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});
+        impact.textContent=k===0?item.y:item.n;
+      });
+    });
+    ql.appendChild(li);
+  });
+
+  // Calculator
+  function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function calc(){
+    var e=+document.getElementById('i-eng').value, s=+document.getElementById('i-sal').value, f=+document.getElementById('i-inf').value;
+    document.getElementById('o-eng').textContent=e;
+    document.getElementById('o-sal').textContent='$'+s+'k';
+    document.getElementById('o-inf').textContent='$'+f+'k';
+    var build=e*s*1000+f*1000*12;
+    document.getElementById('r-build').textContent=money(build);
+    document.getElementById('r-mult').textContent=(build/25000).toFixed(0)+'× the minimum commit';
+  }
+  ['i-eng','i-sal','i-inf'].forEach(function(id){document.getElementById(id).addEventListener('input',calc);});
+  calc();
+
+  // Objections
+  var dlg=document.getElementById('objections');
+  document.getElementById('objections-open').addEventListener('click',function(){dlg.showModal();});
+  document.getElementById('objections-close').addEventListener('click',function(){dlg.close();});
+
+  // Current file highlight
+  var links=document.querySelectorAll('.files a');
+  var files=Array.prototype.slice.call(document.querySelectorAll('.file'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(a){a.setAttribute('aria-current',String(a.getAttribute('href')==='#'+en.target.id));});
+        }
+      });
+    },{rootMargin:'-40% 0px -55% 0px'});
+    files.forEach(function(f){io.observe(f);});
+  }
+
+  // Presenter mode
+  var idx=0, pos=document.getElementById('pos');
+  function go(i){
+    idx=Math.max(0,Math.min(files.length-1,i));
+    files.forEach(function(f,j){f.classList.toggle('current',j===idx);});
+    pos.textContent=(idx+1)+' / '+files.length;
+    window.scrollTo(0,0);
+  }
+  function startPresenting(){body.classList.add('presenting');go(idx);}
+  function stopPresenting(){body.classList.remove('presenting');files[idx].scrollIntoView();}
+  document.getElementById('present').addEventListener('click',startPresenting);
+  document.getElementById('exit').addEventListener('click',stopPresenting);
+  document.getElementById('prev').addEventListener('click',function(){go(idx-1);});
+  document.getElementById('next').addEventListener('click',function(){go(idx+1);});
+  document.addEventListener('keydown',function(e){
+    if(!body.classList.contains('presenting'))return;
+    if(e.target.matches('input,textarea'))return;
+    if(e.key==='ArrowRight'||e.key===' ')go(idx+1);
+    else if(e.key==='ArrowLeft')go(idx-1);
+    else if(e.key==='Escape')stopPresenting();
+    else if(e.key==='p'){var m=!body.classList.contains('plus');document.querySelector('.switch [data-mode="'+(m?'plus':'fund')+'"]').click();}
+  });
+})();
+</script>
+</body>
+</html>
