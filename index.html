@@ -47,6 +47,12 @@ a{color:var(--navy)}
 .pr-meta{color:var(--muted);font-size:14px}
 .pr-meta strong{color:var(--add);font-weight:700}
 .spacer{flex:1}
+/* PR tabs: the two deliverables */
+.pr-tabs{max-width:1240px;margin:0 auto;padding:0 24px;display:flex;gap:4px}
+.pr-tabs a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;color:var(--muted);text-decoration:none;font-weight:600;font-size:15px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.pr-tabs a:hover{color:var(--ink)}
+.pr-tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--add)}
+.pr-tabs .count{font:400 12px var(--mono);background:var(--page);border:1px solid var(--line);border-radius:999px;padding:0 7px}
 .switch{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--page)}
 .switch button{font:600 14px var(--body);border:0;background:transparent;color:var(--muted);padding:7px 14px;border-radius:999px;cursor:pointer}
 .switch button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
@@ -159,8 +165,9 @@ dialog .body{padding:6px 18px 18px}
 dialog details{border-bottom:1px solid var(--line);padding:12px 0}
 dialog summary{cursor:pointer;font-weight:700}
 
+.view[hidden]{display:none}
 /* ---------- Presenter mode ---------- */
-body.presenting .files,body.presenting .open{display:none}
+body.presenting .files,body.presenting .open,body.presenting .pr-tabs{display:none}
 body.presenting .wrap{grid-template-columns:1fr;max-width:1100px}
 body.presenting .file{display:none;min-height:calc(100vh - 140px);font-size:20px}
 body.presenting .file.current{display:block}
@@ -182,6 +189,13 @@ body.presenting .present-bar{display:flex}
   .pr-inner{gap:12px}
   .spacer{display:none}
 }
+@media print{
+  .pr .switch,.pr .btn,.pr-tabs,.files,.present-bar,#view-call{display:none!important}
+  .pr{position:static;border:0}
+  body{background:#fff}
+  .wrap{display:block;padding:0}
+  .file{break-inside:avoid;border-color:#ccc}
+}
 </style>
 </head>
 <body>
@@ -190,7 +204,7 @@ body.presenting .present-bar{display:flex}
   <div class="pr-inner">
     <div class="pr-id">
       <h1 class="pr-title">Win Capital One <span class="num">#1</span></h1>
-      <span class="pr-meta">Dean Sibrizzi wants to merge <strong>8 files</strong> into Greptile's enterprise motion</span>
+      <span class="pr-meta">Dean Sibrizzi wants to merge <strong>1 plan and 5 slides</strong> into Greptile's enterprise motion</span>
     </div>
     <span class="spacer"></span>
     <div class="switch" role="group" aria-label="View">
@@ -198,18 +212,23 @@ body.presenting .present-bar{display:flex}
       <button type="button" data-mode="plus" aria-pressed="false">Fundamentals + plus</button>
     </div>
     <button type="button" class="btn ghost" id="objections-open">Objections</button>
-    <button type="button" class="btn" id="present">Present</button>
+    <button type="button" class="btn" id="present">Present the call</button>
   </div>
+  <nav class="pr-tabs" aria-label="Deliverables">
+    <a href="#plan" data-view="plan" aria-current="page">Account plan <span class="count">1 page</span></a>
+    <a href="#call" data-view="call">First call <span class="count">5 slides</span></a>
+  </nav>
 </header>
 
-<main class="wrap">
+<main>
+<div class="wrap view" id="view-plan">
   <section class="open" aria-label="Opening">
     <p class="lead">The prompt tests sales fundamentals. Here they are, plus what I'd add.</p>
     <p class="sub">At the pace AI is moving, fundamentals are the floor. Flip the switch above to see the additions on every part, shown the way Greptile would show them: as a diff.</p>
   </section>
 
   <nav class="files" aria-label="Changed files">
-    <h2>Files changed</h2>
+    <h2>The plan</h2>
     <ol>
       <li><a href="#why-now">Why now<span class="stat">+3</span></a></li>
       <li><a href="#fit">Where Greptile fits<span class="stat">+2</span></a></li>
@@ -217,8 +236,6 @@ body.presenting .present-bar{display:flex}
       <li><a href="#unknowns">What I don't know<span class="stat">+1</span></a></li>
       <li><a href="#sequence">The sequence<span class="stat">+2</span></a></li>
       <li><a href="#meeting">The first meeting<span class="stat">+1</span></a></li>
-      <li><a href="#prove">Prove it<span class="stat">+2</span></a></li>
-      <li><a href="#champion">Win a champion<span class="stat">+1</span></a></li>
     </ol>
   </nav>
 
@@ -316,17 +333,62 @@ body.presenting .present-bar{display:flex}
       <div class="file-head"><code>outbound/06-first-meeting.md</code><span class="ask">Part 2 · First meeting</span></div>
       <div class="file-body">
         <h3>The first meeting</h3>
-        <p class="q">The structure, what I leave with, and the next step we both agree to. <span class="draft">to write</span></p>
-        <p class="fund-note">Placeholder: timed agenda and "leave with" checklist go here.</p>
+        <p class="q">The goal, the structure, and the next step we both agree to. The full call design is in the First call tab. <span class="draft">to write</span></p>
+        <p class="fund-note">Placeholder: short summary of goal, structure and agreed next step.</p>
         <div class="plus-layer" aria-label="Additions">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Confirm, don't ask.</strong> Research turns discovery into checking hypotheses, which frees half the meeting for their code. <span class="draft">draft</span></p></div>
         </div>
       </div>
     </article>
 
-    <!-- 7 -->
-    <article class="file" id="prove">
-      <div class="file-head"><code>demo/07-prove-it.md</code><span class="ask">Part 3 · Show, don't tell</span></div>
+  </div>
+</div>
+
+<div class="wrap view" id="view-call" hidden>
+  <section class="open" aria-label="Opening">
+    <p class="lead">The first call, in five slides.</p>
+    <p class="sub">How I'd run the first meeting with Capital One's engineering leadership: what I show them, how they prove it to themselves, and how one person leaves ready to sell it internally. <span class="draft">copy to revisit</span></p>
+  </section>
+
+  <nav class="files" aria-label="Slides">
+    <h2>The call</h2>
+    <ol>
+      <li><a href="#slide-agenda">The call on one screen</a></li>
+      <li><a href="#slide-show">Show it on their code<span class="stat">+2</span></a></li>
+      <li><a href="#slide-prove">Prove it</a></li>
+      <li><a href="#slide-champion">Win a champion<span class="stat">+1</span></a></li>
+      <li><a href="#slide-next">The agreed next step</a></li>
+    </ol>
+  </nav>
+
+  <div class="files-content">
+    <article class="file slide" id="slide-agenda">
+      <div class="file-head"><code>call/1-agenda.md</code><span class="ask">Part 3 · Call structure</span></div>
+      <div class="file-body">
+        <h3>The call on one screen</h3>
+        <p class="q">The agenda with time blocks, and what I need to leave with. <span class="draft">content to come</span></p>
+        <p class="fund-note">Placeholder: timed agenda and "leave with" checklist.</p>
+      </div>
+    </article>
+
+    <article class="file slide" id="slide-show">
+      <div class="file-head"><code>call/2-show.md</code><span class="ask">Part 3 · Show, don't tell</span></div>
+      <div class="file-body">
+        <h3>Show it on their code</h3>
+        <p class="q">Greptile's reviews on a public Capital One repo, linked to the originals. <span class="draft">content to come</span></p>
+        <div class="review">
+          <span class="who">greptile-bot</span><span class="conf">confidence 4/5</span>
+          <p>Placeholder: a Greptile review from a public Capital One PR goes here, linked to the original. <span class="draft">to add</span></p>
+        </div>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>This site was reviewed by Greptile.</strong> Every change went through a PR on GitHub. The reviews are public. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>VulnHunter's repo, reviewed.</strong> Greptile on the CISO's own open-source project. <span class="draft">draft</span></p></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="file slide" id="slide-prove">
+      <div class="file-head"><code>call/3-prove-it.md</code><span class="ask">Part 3 · Item 7</span></div>
       <div class="file-body">
         <h3>Prove it</h3>
         <p class="q">Build versus buy, using Capital One's own posted salaries. Move the sliders.</p>
@@ -347,35 +409,36 @@ body.presenting .present-bar{display:flex}
             <small>Salary range anchored to Capital One's posted bands ($179k to $335k base). Inference and commit size are placeholders until discovery. <span class="draft">draft</span></small>
           </div>
         </div>
-        <div class="review">
-          <span class="who">greptile-bot</span><span class="conf">confidence 4/5</span>
-          <p>Placeholder: a Greptile review from a public Capital One PR goes here, linked to the original. <span class="draft">to add</span></p>
-        </div>
-        <div class="plus-layer" aria-label="Additions">
-          <div class="diff-row"><span class="gutter">+</span><p><strong>This site was reviewed by Greptile.</strong> Every change went through a PR on GitHub. The reviews are public. <span class="draft">draft</span></p></div>
-          <div class="diff-row"><span class="gutter">+</span><p><strong>VulnHunter's repo, reviewed.</strong> Greptile on the CISO's own open-source project. <span class="draft">draft</span></p></div>
-        </div>
       </div>
     </article>
 
-    <!-- 8 -->
-    <article class="file" id="champion">
-      <div class="file-head"><code>demo/08-win-a-champion.md</code><span class="ask">Part 3 · Champion</span></div>
+    <article class="file slide" id="slide-champion">
+      <div class="file-head"><code>call/4-champion.md</code><span class="ask">Part 3 · Item 8</span></div>
       <div class="file-body">
         <h3>Win a champion</h3>
-        <p class="q">How one meeting turns one person into an internal seller. <span class="draft">to write</span></p>
-        <p class="fund-note">Placeholder: champion kit with audience switch (CISO, VP Eng, CFO) goes here.</p>
+        <p class="q">How one meeting turns one person into an internal seller. <span class="draft">content to come</span></p>
+        <p class="fund-note">Placeholder: champion kit with audience switch (CISO, VP Eng, CFO).</p>
         <div class="plus-layer" aria-label="Additions">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Give them the deck they'd write.</strong> The champion leaves with a forwardable page built on their own team's numbers. <span class="draft">draft</span></p></div>
         </div>
       </div>
     </article>
+
+    <article class="file slide" id="slide-next">
+      <div class="file-head"><code>call/5-next-step.md</code><span class="ask">Part 3 · Close</span></div>
+      <div class="file-body">
+        <h3>The agreed next step</h3>
+        <p class="q">The mutual plan left on the table, with dates and owners. <span class="draft">content to come</span></p>
+        <p class="fund-note">Placeholder: mutual plan, such as a shadow-mode pilot.</p>
+      </div>
+    </article>
   </div>
+</div>
 </main>
 
 <div class="present-bar" aria-label="Presenter controls">
   <button type="button" id="prev">Back</button>
-  <span id="pos">1 / 8</span>
+  <span id="pos">1 / 5</span>
   <button type="button" id="next">Next</button>
   <button type="button" id="exit">Exit</button>
 </div>
@@ -491,7 +554,8 @@ body.presenting .present-bar{display:flex}
 
   // Current file highlight
   var links=document.querySelectorAll('.files a');
-  var files=Array.prototype.slice.call(document.querySelectorAll('.file'));
+  var allFiles=document.querySelectorAll('.file');
+  var files=Array.prototype.slice.call(document.querySelectorAll('#view-call .slide'));
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(en){
@@ -500,7 +564,7 @@ body.presenting .present-bar{display:flex}
         }
       });
     },{rootMargin:'-40% 0px -55% 0px'});
-    files.forEach(function(f){io.observe(f);});
+    allFiles.forEach(function(f){io.observe(f);});
   }
 
   // Presenter mode
@@ -511,7 +575,36 @@ body.presenting .present-bar{display:flex}
     pos.textContent=(idx+1)+' / '+files.length;
     window.scrollTo(0,0);
   }
-  function startPresenting(){body.classList.add('presenting');go(idx);}
+  // Two views: the one-page plan and the five-slide call
+  var views={plan:document.getElementById('view-plan'),call:document.getElementById('view-call')};
+  var tabs=document.querySelectorAll('.pr-tabs a');
+  function setView(name){
+    if(!views[name])name='plan';
+    Object.keys(views).forEach(function(k){views[k].hidden=(k!==name);});
+    tabs.forEach(function(t){
+      if(t.dataset.view===name)t.setAttribute('aria-current','page');else t.removeAttribute('aria-current');
+    });
+  }
+  function viewForHash(){
+    var h=location.hash.slice(1);
+    if(h==='call'||h==='plan')return h;
+    var el=h&&document.getElementById(h);
+    return el&&views.call.contains(el)?'call':'plan';
+  }
+  function route(){
+    var name=viewForHash();
+    if(body.classList.contains('presenting')&&name!=='call')body.classList.remove('presenting');
+    setView(name);
+    var h=location.hash.slice(1);
+    if(h==='call'||h==='plan')window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',route);
+  route();
+
+  function startPresenting(){
+    if(location.hash!=='#call'&&viewForHash()!=='call')history.replaceState(null,'','#call');
+    setView('call');body.classList.add('presenting');go(idx);
+  }
   function stopPresenting(){body.classList.remove('presenting');files[idx].scrollIntoView();}
   document.getElementById('present').addEventListener('click',startPresenting);
   document.getElementById('exit').addEventListener('click',stopPresenting);
