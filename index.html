@@ -116,7 +116,7 @@ body.plus .plus-layer{display:block}
 .timeline li.open .detail{display:block}
 
 /* land path */
-.path{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:14px}
+.path{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:14px}
 .step{all:unset;cursor:pointer;padding:14px;border:1px solid var(--line);border-right:0;background:var(--page)}
 .step:last-child{border-right:1px solid var(--line);border-radius:0 8px 8px 0}
 .step:first-child{border-radius:8px 0 0 8px}
@@ -166,6 +166,63 @@ dialog details{border-bottom:1px solid var(--line);padding:12px 0}
 dialog summary{cursor:pointer;font-weight:700}
 
 .view[hidden]{display:none}
+.print-only{display:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.stack{font-size:15px;margin:0 0 14px}
+.stack strong{font-weight:700}
+.footnote{font-size:13px;color:var(--muted);margin:10px 0 0}
+/* org chart */
+:root{--infl:#6B4FA0;--gate:#A8432E}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--infl:#B9A4E6;--gate:#E8957F}}
+:root[data-theme="dark"]{--infl:#B9A4E6;--gate:#E8957F}
+.stages{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.stages button{font:600 13px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.stages button[aria-pressed="true"]{background:var(--ink);color:var(--page);border-color:var(--ink)}
+.org-scroll{overflow-x:auto;margin:0 -4px}
+.org{display:block;width:100%;min-width:620px;height:auto;font-family:var(--body)}
+.org text{font-size:11px;fill:var(--muted)}
+.org .nm{font-size:12px;font-weight:700;fill:var(--ink)}
+.org .rl{font-weight:700}
+.org-box{fill:none;stroke:var(--line);stroke-width:1.25}
+.org .org-label{font-size:12px;font-weight:700;fill:var(--muted)}
+.org-lines path{fill:none;stroke:var(--muted);stroke-width:1.25;opacity:.6}
+.org-lines .dash,.org-land path{stroke-dasharray:4 4}
+.org-land path{fill:none;stroke:var(--add);stroke-width:1.5}
+.org-land text{fill:var(--ink)} .org-land .land-k{fill:var(--add);font-weight:700}
+.node rect{stroke-width:1.5;fill-opacity:.06;transition:opacity .2s,stroke-width .2s}
+.node.gap rect{stroke-dasharray:5 4}
+.node.main rect{stroke-width:2;fill-opacity:.16}
+.k-champ rect,.org-key .k-champ{fill:var(--add);stroke:var(--add)} .k-champ .rl{fill:var(--add)}
+.k-dec rect,.org-key .k-dec{fill:var(--navy);stroke:var(--navy)} .k-dec .rl{fill:var(--navy)}
+.k-gate rect,.org-key .k-gate{fill:var(--gate);stroke:var(--gate)} .k-gate .rl{fill:var(--gate)}
+.k-infl rect,.org-key .k-infl{fill:var(--infl);stroke:var(--infl)} .k-infl .rl{fill:var(--infl)}
+.org-key rect{fill-opacity:.16;stroke-width:1.5}
+.org-key .k-unknown{fill:none;stroke:var(--muted);stroke-dasharray:3 2}
+.org-key text{font-size:11.5px;fill:var(--ink)}
+.org.staged .node{opacity:.25;transition:opacity .2s}
+.org.staged .node.is-lead,.org.staged .node.is-yes,.org.staged .node.is-block,.org.staged .node.is-infl{opacity:1}
+.org.staged .node.is-lead rect,.org.staged .node.is-yes rect,.org.staged .node.is-block rect,.org.staged .node.is-infl rect{stroke-width:3;fill-opacity:.18}
+.stage-detail{margin-top:10px;padding:12px 14px;border-radius:8px;background:var(--page);border:1px solid var(--line);font-size:15px}
+/* outbound touches */
+.touches{list-style:none;margin:0 0 14px;padding:0;border-left:2px solid var(--line)}
+.touches>li{position:relative;padding:0 0 14px 22px}
+.touches>li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--add)}
+.touches button{all:unset;cursor:pointer;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.touches button:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.touches .when{font:700 13px var(--mono);color:var(--add)}
+.touches .what{font-weight:600}
+.touches .cta{font-size:13px;color:var(--muted)}
+.touches .msg{display:none;margin-top:8px;padding:12px 16px;border:1px solid var(--line);border-radius:8px;background:var(--page);font-size:15px}
+.touches>li.open .msg{display:block}
+.touches .msg p{margin:0 0 8px} .touches .msg ul{margin:0 0 8px;padding-left:20px}
+.touches .subj{font:400 13px var(--mono);color:var(--muted)}
+/* first meeting */
+.agenda{display:flex;gap:3px;margin:0 0 14px}
+.agenda>div{background:var(--navy-bg);border-radius:6px;padding:8px 10px;min-width:0}
+.agenda .t{display:block;font:700 12px var(--mono);color:var(--navy)}
+.agenda .b{display:block;font-size:14px;font-weight:600;line-height:1.25}
+.checks{list-style:none;margin:0 0 14px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;font-size:15px}
+.checks input{accent-color:var(--add);margin-right:6px}
 /* ---------- Presenter mode ---------- */
 body.presenting .files,body.presenting .open,body.presenting .pr-tabs{display:none}
 body.presenting .wrap{grid-template-columns:1fr;max-width:1100px}
@@ -182,6 +239,9 @@ body.presenting .present-bar{display:flex}
   .files ol{display:flex;overflow-x:auto;gap:4px}
   .files li a{white-space:nowrap}
   .path{grid-template-columns:1fr 1fr}
+  .path .step:last-child{grid-column:1/-1}
+  .checks{grid-template-columns:1fr}
+  .agenda .b{font-size:12px}
   .step,.step:first-child,.step:last-child{border:1px solid var(--line);border-radius:0}
   .calc{grid-template-columns:1fr}
   .file-body{padding:20px 18px 24px}
@@ -190,39 +250,51 @@ body.presenting .present-bar{display:flex}
   .spacer{display:none}
 }
 @media print{
-  @page{size:letter;margin:0.4in}
+  @page{size:letter;margin:0.35in}
   html{font-size:9px}
-  body{background:#fff;font-size:8.5pt;line-height:1.3}
+  body{background:#fff;font-size:7.5pt;line-height:1.25}
   .pr .switch,.pr .btn,.pr-tabs,.files,.present-bar,#view-call,.open .sub,.draft,
-  .timeline .detail,.qs .ans,.qs .impact,.step-detail,.person-detail,.fund-note{display:none!important}
+  .timeline .detail,.qs .ans,.qs .impact,.step-detail,.fund-note,
+  .stages,.org-scroll,.stage-detail,.footnote,.touches .msg,.checks input{display:none!important}
+  .print-only{display:block!important}
+  .roles.sr-only{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal}
   .pr{position:static;border:0}
-  .pr-inner{padding:0 0 4pt}
-  .pr-title{font-size:16pt}
-  .open{padding:0 0 6pt}
-  .open p.lead{font-size:12pt;margin:0}
+  .pr-inner{padding:0 0 3pt}
+  .pr-title{font-size:14pt}
+  .pr-meta{font-size:7.5pt}
+  .open{padding:0 0 4pt}
+  .open p.lead{font-size:11pt;margin:0}
   .wrap{display:block;padding:0}
-  #view-plan .files-content{display:grid;grid-template-columns:1fr 1fr;gap:6pt}
+  #view-plan .files-content{display:grid;grid-template-columns:1fr 1fr;gap:5pt}
   .file{margin:0;break-inside:avoid;border-color:#ccc;border-radius:4px}
-  .file-head{padding:2pt 6pt}
-  .file-head code,.file-head .ask{font-size:7pt}
-  .file-body{padding:5pt 7pt}
-  .file h3{font-size:10.5pt;margin:0 0 2pt}
-  .file .q{font-size:8pt;margin:0 0 4pt}
+  .file-head{padding:1.5pt 6pt}
+  .file-head code,.file-head .ask{font-size:6.5pt}
+  .file-body{padding:4pt 6pt}
+  .file h3{font-size:9.5pt;margin:0 0 2pt}
+  .file .q{font-size:7.5pt;margin:0 0 3pt}
   .file p,.file li{max-width:none}
-  .timeline{margin:0}
-  .timeline li{padding:0 0 1pt 10pt}
-  .timeline li::before{width:5pt;height:5pt;left:-4pt;top:4pt}
-  .timeline .when{font-size:7pt}
-  .path{grid-template-columns:repeat(4,1fr);margin:0}
-  .step{padding:3pt 4pt}
-  .step .k{font-size:6.5pt}
-  .people{grid-template-columns:1fr 1fr;gap:3pt;margin:0}
-  .person{padding:2pt 4pt}
-  .qs{gap:2pt;margin:0}
-  .qs li{padding:2pt 5pt}
-  .qs .qt{margin:0;font-size:8pt}
-  .plus-layer{margin-top:4pt}
-  .plus-layer .diff-row{padding:2pt 4pt 2pt 0;grid-template-columns:12pt 1fr}
+  .stack{font-size:7.5pt;margin:0 0 3pt}
+  .timeline,.touches{margin:0}
+  .timeline li,.touches>li{padding:0 0 1pt 9pt}
+  .timeline li::before,.touches>li::before{width:5pt;height:5pt;left:-4pt;top:3pt}
+  .timeline .when,.touches .when{font-size:6.5pt}
+  .touches .cta{font-size:6.5pt}
+  .path{grid-template-columns:repeat(5,1fr);margin:0}
+  .step{padding:2pt 3pt}
+  .step .k{font-size:6pt}
+  .step .n{font-size:7pt}
+  .roles{margin:0;padding-left:10pt}
+  .qs{gap:1pt;margin:0}
+  .qs li{padding:1pt 4pt}
+  .qs .qt{margin:0;font-size:7.5pt}
+  .agenda{margin:0 0 3pt}
+  .agenda>div{padding:2pt 4pt}
+  .agenda .t{font-size:6pt} .agenda .b{font-size:7pt}
+  .checks{font-size:7pt;gap:0 8pt;margin:0 0 3pt;list-style:disc;padding-left:10pt}
+  .plus-layer{margin-top:3pt}
+  .plus-layer .diff-row{padding:1pt 4pt 1pt 0;grid-template-columns:10pt 1fr;font-size:7pt}
+  .plus-layer p{font-size:0;line-height:1.2}
+  .plus-layer p strong{font-size:7pt}
 }
 </style>
 </head>
@@ -259,11 +331,11 @@ body.presenting .present-bar{display:flex}
     <h2>The plan</h2>
     <ol>
       <li><a href="#why-now">Why now<span class="stat">+3</span></a></li>
-      <li><a href="#fit">Where Greptile fits<span class="stat">+2</span></a></li>
-      <li><a href="#who">Who matters<span class="stat">+1</span></a></li>
-      <li><a href="#unknowns">What I don't know<span class="stat">+1</span></a></li>
-      <li><a href="#sequence">The sequence<span class="stat">+2</span></a></li>
-      <li><a href="#meeting">The first meeting<span class="stat">+1</span></a></li>
+      <li><a href="#fit">Where Greptile fits<span class="stat">+3</span></a></li>
+      <li><a href="#who">Who matters<span class="stat">+2</span></a></li>
+      <li><a href="#unknowns">What I don't know<span class="stat">+2</span></a></li>
+      <li><a href="#sequence">The sequence<span class="stat">+4</span></a></li>
+      <li><a href="#meeting">The first meeting<span class="stat">+2</span></a></li>
     </ol>
   </nav>
 
@@ -274,23 +346,25 @@ body.presenting .present-bar{display:flex}
       <div class="file-head"><code>plan/01-why-now.md</code><span class="ask">Part 1 · Strategic account plan</span></div>
       <div class="file-body">
         <h3>Why Capital One, why now</h3>
-        <p class="q">Capital One is integrating three acquisitions while it pushes AI coding across one of the largest engineering orgs in banking. Click an event to see the detail and the source.</p>
+        <p class="q">Capital One is pushing more changes through one pipeline while it integrates three acquisitions, and its own platform chief says incidents come from deployments. Click an event to see the detail and the source.</p>
         <ol class="timeline">
           <li><button type="button"><span class="when">May 2025</span> <span class="what">Discover acquisition closes</span></button>
             <div class="detail">Years of migration work onto Capital One's stack, including data centers and mainframes. <a href="https://www.bankingdive.com/news/capital-one-readies-for-discover-integration-work/746131/" target="_blank" rel="noopener">Banking Dive</a></div></li>
-          <li><button type="button"><span class="when">Apr 2026</span> <span class="what">Brex acquisition closes</span></button>
-            <div class="detail">An AI-native engineering org whose CTO says over 45% of code changes are fully AI-written. <a href="https://www.capitalone.com/about/newsroom/capital-one-completes-acquisition-of-brex/" target="_blank" rel="noopener">Capital One newsroom</a> · <a href="https://cursor.com/customers/upwork" target="_blank" rel="noopener">Cursor customers</a></div></li>
-          <li><button type="button"><span class="when">Apr 2026</span> <span class="what">Hopper travel tech brought in-house</span></button>
-            <div class="detail">About 150 Hopper employees and the platform behind Capital One Travel. <a href="https://skift.com/?p=807849" target="_blank" rel="noopener">Skift</a></div></li>
-          <li><button type="button"><span class="when">Jul 2026</span> <span class="what">AI DevEx hiring: make AI code review the enterprise default</span></button>
-            <div class="detail">A stated priority with a named team. <a href="https://www.capitalonecareers.com/job/mclean/senior-manager-product-management-developer-experience-ai-coding-tools/1732/98489984496" target="_blank" rel="noopener">Capital One careers</a></div></li>
-          <li><button type="button"><span class="when">Jul 2026</span> <span class="what">VulnHunter open-sourced</span></button>
-            <div class="detail">The CISO org's agentic code-security tool, built around reducing false positives. <a href="https://capitalone.com/tech/open-source/announcing-vulnhunter/" target="_blank" rel="noopener">Capital One Tech</a></div></li>
+          <li><button type="button"><span class="when">Jan 2026</span> <span class="what">"The incidents you see are deployment related"</span></button>
+            <div class="detail">Ameesh Paleja, EVP of Enterprise Platforms: ~14,000 technologists ship through one pipeline, and the number of changes has risen "pretty dramatically." <a href="https://linearb.io/dev-interrupted/podcast/capital-one-standardized-pipeline-ameesh-paleja" target="_blank" rel="noopener">Dev Interrupted</a></div></li>
+          <li><button type="button"><span class="when">Apr 2026</span> <span class="what">Brex acquisition closes; Hopper travel tech brought in-house</span></button>
+            <div class="detail">Brex is AI-native: its CTO says over 45% of code changes are fully AI-written. About 150 Hopper employees came over with the platform behind Capital One Travel. <a href="https://www.capitalone.com/about/newsroom/capital-one-completes-acquisition-of-brex/" target="_blank" rel="noopener">Capital One</a> · <a href="https://cursor.com/customers/upwork" target="_blank" rel="noopener">Cursor</a> · <a href="https://skift.com/?p=807849" target="_blank" rel="noopener">Skift</a></div></li>
+          <li><button type="button"><span class="when">Jun 2026</span> <span class="what">Mobile app outage, 4,000+ reports</span></button>
+            <div class="detail">One of two widely reported outages this year; no cause published. The point is the stakes, not the cause. <a href="https://gvwire.com/2026/06/18/capital-one-down-for-thousands-downdetector-reports" target="_blank" rel="noopener">GV Wire</a> · <a href="https://hoodline.com/2026/04/capital-one-tech-snafu-strands-d-c-customers-at-checkout/" target="_blank" rel="noopener">Hoodline</a></div></li>
+          <li><button type="button"><span class="when">Jul 2026</span> <span class="what">DevEx hiring to make AI code review the enterprise default</span></button>
+            <div class="detail">A stated priority with a named team that measures Claude Code, Windsurf and Copilot. <a href="https://www.capitalonecareers.com/job/mclean/senior-manager-product-management-developer-experience-ai-coding-tools/1732/98489984496" target="_blank" rel="noopener">Capital One careers</a></div></li>
+          <li><button type="button"><span class="when">Jul 2026</span> <span class="what">VulnHunter open-sourced; Discover cardholders move into the app</span></button>
+            <div class="detail">The CISO org's agentic security scanner went public, and the Discover migration started reaching customers: complaints about logins and missed autopays peaked in early August. <a href="https://capitalone.com/tech/open-source/announcing-vulnhunter/" target="_blank" rel="noopener">Capital One Tech</a> · <a href="https://unstar.app/blog/discover-card-moved-to-capital-one-app-reviews-2026" target="_blank" rel="noopener">Unstar</a></div></li>
         </ol>
         <div class="plus-layer" aria-label="Additions">
-          <div class="diff-row"><span class="gutter">+</span><p><strong>Three codebases nobody at Capital One wrote.</strong> Brex, Hopper and Discover all need review by engineers who lack context on the code. That's the problem Greptile's codebase graph solves. <span class="draft">draft</span></p></div>
-          <div class="diff-row"><span class="gutter">+</span><p><strong>The CISO already speaks our language.</strong> VulnHunter's pitch is fewer false positives; Greptile averages about 1.5 comments per PR. <span class="draft">draft</span></p></div>
-          <div class="diff-row"><span class="gutter">+</span><p><strong>Research method.</strong> Built from postings, filings and public repos in an afternoon with AI, then checked by hand. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Three codebases nobody at Capital One wrote.</strong> Brex, Hopper and Discover all need review by engineers who lack context on the code. That's the problem Greptile's codebase graph solves.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Security covers exploits; per-PR review is still open.</strong> VulnHunter audits code for ways in. Nothing reviews every change before merge with context across repos.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Research method.</strong> Built from postings, filings, podcasts and public repos with AI, then checked by hand against the sources.</p></div>
         </div>
       </div>
     </article>
@@ -300,17 +374,20 @@ body.presenting .present-bar{display:flex}
       <div class="file-head"><code>plan/02-where-greptile-fits.md</code><span class="ask">Part 1 · Land and expand</span></div>
       <div class="file-body">
         <h3>Where Greptile fits</h3>
-        <p class="q">Land small inside the governance wall, then let usage outgrow the commit. Step through the path.</p>
+        <p class="q">Brex already runs Greptile on 100% of its code. Start where Brex and Capital One code meet, prove it on Capital One's own PRs, then become the standard before integration picks one. Step through the path.</p>
+        <p class="stack"><strong>Review today:</strong> a human on every PR, an AI first pass (Copilot and an in-house build), static analysis, and VulnHunter for security. At Brex: Greptile, 500+ PRs a day. <a href="https://www.greptile.com/customers/brex" target="_blank" rel="noopener">Brex case study</a></p>
         <div class="path" role="group" aria-label="Land and expand path">
-          <button class="step" type="button" aria-pressed="true" aria-controls="step-detail" data-step="0"><span class="k">Land</span><span class="n">Brex engineering</span></button>
-          <button class="step" type="button" aria-pressed="false" aria-controls="step-detail" data-step="1"><span class="k">Standardize</span><span class="n">AI DevEx team</span></button>
-          <button class="step" type="button" aria-pressed="false" aria-controls="step-detail" data-step="2"><span class="k">Expand</span><span class="n">Hopper + Discover</span></button>
-          <button class="step" type="button" aria-pressed="false" aria-controls="step-detail" data-step="3"><span class="k">Enterprise</span><span class="n">Bank-wide commit</span></button>
+          <button class="step" type="button" aria-pressed="true" aria-controls="step-detail"><span class="k">Keep</span><span class="n">Brex</span></button>
+          <button class="step" type="button" aria-pressed="false" aria-controls="step-detail"><span class="k">Land</span><span class="n">Integration repos</span></button>
+          <button class="step" type="button" aria-pressed="false" aria-controls="step-detail"><span class="k">Prove</span><span class="n">DevEx bake-off</span></button>
+          <button class="step" type="button" aria-pressed="false" aria-controls="step-detail"><span class="k">Expand</span><span class="n">Hopper, Discover, Software</span></button>
+          <button class="step" type="button" aria-pressed="false" aria-controls="step-detail"><span class="k">Standardize</span><span class="n">Enterprise default</span></button>
         </div>
         <div class="step-detail" id="step-detail" aria-live="polite"></div>
         <div class="plus-layer" aria-label="Additions">
-          <div class="diff-row"><span class="gutter">+</span><p><strong>Review for code you inherited.</strong> Each acquisition is a repeatable land with its own leader and urgency. <span class="draft">draft</span></p></div>
-          <div class="diff-row"><span class="gutter">+</span><p><strong>Shadow-mode pilot.</strong> Greptile reviews quietly for 30 days; the findings become the business case. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Review for code you inherited.</strong> Brex, Hopper and Discover are each a land with its own leader and deadline.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Shadow-mode pilot.</strong> Greptile reviews quietly for 30 days; the findings become the business case.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>A bake-off they already expect.</strong> Capital One's tool funnel is built for head-to-head trials, so we ask for one on their PRs.</p></div>
         </div>
       </div>
     </article>
@@ -320,11 +397,59 @@ body.presenting .present-bar{display:flex}
       <div class="file-head"><code>plan/03-who-matters.md</code><span class="ask">Part 1 · Multi-threading</span></div>
       <div class="file-body">
         <h3>Who matters</h3>
-        <p class="q">Click a person to see what they care about and how I reach them.</p>
-        <div class="people" id="people"></div>
-        <div class="person-detail" id="person-detail" aria-live="polite">Select a person above.</div>
+        <p class="q">Brex's CTO is the way in; decisions run through DevEx and Enterprise Platforms. Pick a stage to see who leads, who must say yes, and who could block.</p>
+        <div class="stages" role="group" aria-label="Stage">
+          <button type="button" aria-pressed="true" data-stage="all">Everyone</button>
+          <button type="button" aria-pressed="false" data-stage="keep">Keep</button>
+          <button type="button" aria-pressed="false" data-stage="land">Land</button>
+          <button type="button" aria-pressed="false" data-stage="prove">Prove</button>
+          <button type="button" aria-pressed="false" data-stage="expand">Expand</button>
+          <button type="button" aria-pressed="false" data-stage="standardize">Standardize</button>
+        </div>
+        <div class="org-scroll">
+          <svg class="org" id="org" viewBox="0 0 760 530" role="img" aria-labelledby="org-title" aria-describedby="org-roles">
+            <title id="org-title">Org chart: 12 people at Capital One and Brex, with three unnamed roles</title>
+            <rect class="org-box" x="16" y="8" width="516" height="448" rx="10"/>
+            <text class="org-label" x="28" y="30">Capital One</text>
+            <rect class="org-box" x="544" y="8" width="200" height="236" rx="10"/>
+            <text class="org-label" x="556" y="30">Brex, acquired April 2026</text>
+            <g class="org-lines">
+              <path d="M106 116V148"/><path class="dash" d="M106 132H442M274 132V148M442 132V148"/>
+              <path d="M106 224V256"/><path d="M106 332V364M106 348H274V364"/><path d="M644 116V148"/>
+            </g>
+            <g class="org-land"><path d="M520 294H644V224"/><text x="540" y="312" class="land-k">First land:</text><text x="540" y="327">integration repos</text></g>
+            <g class="node k-dec" data-id="alexander"><rect x="28" y="40" width="156" height="76" rx="8"/><text x="40" y="62" class="nm">Rob Alexander</text><text x="40" y="78">CIO, since 2007</text><text x="40" y="92">Runs all technology</text><text x="40" y="108" class="rl">Final approver</text></g>
+            <g class="node k-dec" data-id="cooper"><rect x="196" y="40" width="156" height="76" rx="8"/><text x="208" y="62" class="nm">Matthew Cooper</text><text x="208" y="78">President, Discover</text><text x="208" y="92">Integration; GC</text><text x="208" y="108" class="rl">Integration exec</text></g>
+            <g class="node k-gate" data-id="west"><rect x="364" y="40" width="156" height="76" rx="8"/><text x="376" y="62" class="nm">Kara West</text><text x="376" y="78">Chief Enterprise</text><text x="376" y="92">Risk Officer</text><text x="376" y="108" class="rl">Vendor risk gate</text></g>
+            <g class="node k-dec" data-id="paleja"><rect x="28" y="148" width="156" height="76" rx="8"/><text x="40" y="170" class="nm">Ameesh Paleja</text><text x="40" y="186">EVP, Enterprise</text><text x="40" y="200">Platforms (pipeline)</text><text x="40" y="216" class="rl">Likely buyer</text></g>
+            <g class="node k-gate" data-id="nims"><rect x="196" y="148" width="156" height="76" rx="8"/><text x="208" y="170" class="nm">Chris Nims</text><text x="208" y="186">EVP, CISO</text><text x="208" y="200">Sponsors VulnHunter</text><text x="208" y="216" class="rl">Security gate</text></g>
+            <g class="node k-gate gap" data-id="mlx"><rect x="364" y="148" width="156" height="76" rx="8"/><text x="376" y="170" class="nm">MLX review lead</text><text x="376" y="186">In-house AI reviewer</text><text x="376" y="200">Bangalore; unnamed</text><text x="376" y="216" class="rl">Could block</text></g>
+            <g class="node k-dec" data-id="mcgarvey"><rect x="28" y="256" width="156" height="76" rx="8"/><text x="40" y="278" class="nm">Catherine McGarvey</text><text x="40" y="294">SVP, Developer</text><text x="40" y="308">Experience</text><text x="40" y="324" class="rl">Exec sponsor</text></g>
+            <g class="node k-champ gap" data-id="integration"><rect x="364" y="256" width="156" height="76" rx="8"/><text x="376" y="278" class="nm">Integration lead</text><text x="376" y="294">Bank side of Brex</text><text x="376" y="308">integration; unnamed</text><text x="376" y="324" class="rl">Owns the land</text></g>
+            <g class="node k-champ gap" data-id="devex"><rect x="28" y="364" width="156" height="76" rx="8"/><text x="40" y="386" class="nm">AI DevEx manager</text><text x="40" y="402">Owns AI coding tools</text><text x="40" y="416">Unnamed</text><text x="40" y="432" class="rl">Day-to-day champion</text></g>
+            <g class="node k-infl" data-id="kanat"><rect x="196" y="364" width="156" height="76" rx="8"/><text x="208" y="386" class="nm">Max Kanat-Alexander</text><text x="208" y="402">Exec. Distinguished</text><text x="208" y="416">Engineer</text><text x="208" y="432" class="rl">Influencer</text></g>
+            <g class="node k-dec" data-id="franceschi"><rect x="566" y="40" width="156" height="76" rx="8"/><text x="578" y="62" class="nm">Pedro Franceschi</text><text x="578" y="78">CEO, Brex</text><text x="578" y="92">Still leads Brex</text><text x="578" y="108" class="rl">Brex sponsor</text></g>
+            <g class="node k-champ main" data-id="reggio"><rect x="566" y="148" width="156" height="76" rx="8"/><text x="578" y="170" class="nm">James Reggio</text><text x="578" y="186">CTO, Brex</text><text x="578" y="200">Chose Greptile</text><text x="578" y="216" class="rl">Existing champion</text></g>
+            <g class="org-key">
+              <rect class="k-champ" x="24" y="482" width="12" height="12" rx="3"/><text x="42" y="492">Champion</text>
+              <rect class="k-dec" x="120" y="482" width="12" height="12" rx="3"/><text x="138" y="492">Decides or sponsors</text>
+              <rect class="k-gate" x="290" y="482" width="12" height="12" rx="3"/><text x="308" y="492">Gate or could block</text>
+              <rect class="k-infl" x="450" y="482" width="12" height="12" rx="3"/><text x="468" y="492">Influencer</text>
+              <rect class="k-unknown" x="550" y="482" width="12" height="12" rx="3"/><text x="568" y="492">Name or line unknown</text>
+            </g>
+          </svg>
+        </div>
+        <div class="stage-detail" id="stage-detail" aria-live="polite"></div>
+        <ul class="roles sr-only" id="org-roles">
+          <li><strong>Champions:</strong> James Reggio (Brex CTO), AI DevEx manager*, bank-side integration lead*</li>
+          <li><strong>Decide or sponsor:</strong> Catherine McGarvey (SVP DevEx), Ameesh Paleja (EVP Enterprise Platforms), Rob Alexander (CIO), Matthew Cooper, Pedro Franceschi</li>
+          <li><strong>Gates or could block:</strong> Chris Nims (CISO), Kara West (Risk), MLX review lead*</li>
+          <li><strong>Influencer:</strong> Max Kanat-Alexander. <em>*Unnamed: to fill in discovery.</em></li>
+        </ul>
+        <p class="footnote">Public sources, Oct 2026. Reporting lines below the CIO are likely, not confirmed. Dashed boxes are roles to name in discovery.</p>
         <div class="plus-layer" aria-label="Additions">
-          <div class="diff-row"><span class="gutter">+</span><p><strong>Turn the blocker into the ally.</strong> Security usually slows AI tools down. Here, the CISO org just shipped one. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Turn the blocker into the ally.</strong> Security usually slows AI tools down; here, the CISO org just shipped one. The security thread starts at stage 1, not stage 4.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>The gaps are the plan.</strong> The dashed boxes are what the first three conversations need to fill.</p></div>
         </div>
       </div>
     </article>
@@ -337,7 +462,8 @@ body.presenting .present-bar{display:flex}
         <p class="q">Five questions for discovery. Pick an answer and see how the plan changes.</p>
         <ul class="qs" id="qs"></ul>
         <div class="plus-layer" aria-label="Additions">
-          <div class="diff-row"><span class="gutter">+</span><p><strong>A plan built to be wrong.</strong> Every assumption has a fallback, so a bad answer changes the route instead of killing the deal. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>A plan built to be wrong.</strong> Every assumption has a fallback, so a bad answer changes the route instead of killing the deal.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Ask Greptile first.</strong> What has Brex's account done since April: usage, renewal date, any sign of migration?</p></div>
         </div>
       </div>
     </article>
@@ -347,11 +473,30 @@ body.presenting .present-bar{display:flex}
       <div class="file-head"><code>outbound/05-sequence.md</code><span class="ask">Part 2 · Outbound</span></div>
       <div class="file-body">
         <h3>The sequence</h3>
-        <p class="q">Who I reach first, three touches, and the first message in full. <span class="draft">to write</span></p>
-        <p class="fund-note">Placeholder: touch timeline and first-message mock go here.</p>
+        <p class="q">First stop: Catherine McGarvey, SVP of Developer Experience, whose team is choosing the enterprise-default AI reviewer. Three touches, each with new evidence, ending in a referral to whoever runs the evaluation.</p>
+        <p class="stack"><strong>Step zero:</strong> Greptile's Brex account owner and James Reggio. Confirm Brex's status, and ask for a warm intro. If Reggio makes one, it replaces touch 1.</p>
+        <ol class="touches" id="touches">
+          <li class="open"><button type="button" aria-expanded="true"><span class="when">Day 1 · Email</span> <span class="what">Brex's numbers, in her own terms</span> <span class="cta">Ask: 25 minutes</span></button>
+            <div class="msg">
+              <p class="subj">Subject: Greptile / Capital One - AI review at Brex</p>
+              <p>Hi Catherine,</p>
+              <p>Your line in your Capital One Tech profile stuck with me: "If we can't clearly tell whether we've made something better, we probably haven't." That's the right bar for AI code review, and part of Capital One is already measuring against it.</p>
+              <p>Brex runs Greptile on 100% of its code:</p>
+              <ul><li>400+ engineers, 500+ PRs reviewed a day</li><li>About 8,200 issues caught a month, and PRs merging about 30% faster</li><li>They weighed building their own reviewer and decided it would take longer and cost more</li></ul>
+              <p>With your team working to make AI review the enterprise default, would 25 minutes to put Brex's numbers next to what DevEx measures today be useful?</p>
+              <p>Best,<br>Dean</p>
+            </div></li>
+          <li><button type="button" aria-expanded="false"><span class="when">Day 4 · LinkedIn</span> <span class="what">The peer framing</span> <span class="cta">Ask: compare notes</span></button>
+            <div class="msg"><p>Hey Catherine - sent you a note on the AI review results Brex is seeing. Your team's goal of making AI review the enterprise default is close to what Brex already did. Worth comparing notes?</p></div></li>
+          <li><button type="button" aria-expanded="false"><span class="when">Day 9 · Email</span> <span class="what">A concrete evaluation design</span> <span class="cta">Ask: who runs evaluations?</span></button>
+            <div class="msg"><p>Hi Catherine,</p><p>Here's how a head-to-head on Capital One's own PRs could run: 30 days, Greptile in shadow mode next to your current reviewer, findings posted to a dashboard instead of the PRs, scored on signal-to-noise. Your team keeps the data either way.</p><p>Who on your team runs AI tool evaluations? Happy to send them the full design.</p><p>Best,<br>Dean</p></div></li>
+        </ol>
+        <p class="stack"><strong>Educate before the meeting:</strong> executives get a one-page build-vs-buy on Capital One's posted salary bands plus Brex's numbers; engineers get Greptile's reviews on a public Capital One repo and the free trial.</p>
         <div class="plus-layer" aria-label="Additions">
-          <div class="diff-row"><span class="gutter">+</span><p><strong>Lead with their code.</strong> The first touch carries what Greptile found on a public Capital One repo. <span class="draft">draft</span></p></div>
-          <div class="diff-row"><span class="gutter">+</span><p><strong>Check the card swipes first.</strong> Look for existing self-serve usage from Capital One and Brex domains before any cold outreach. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Review their open source, privately.</strong> Run Greptile on VulnHunter's open PRs and send the findings to its maintainers in the CISO org. Private, because public findings on a security tool read as a gotcha.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>A dinner on reviewing code you didn't write.</strong> Eight to ten people near McLean, hosted with James Reggio, with Max Kanat-Alexander invited to lead the conversation.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Give where gifts can't go.</strong> For every confirmed issue Greptile finds in Capital One's public repos in 30 days, a donation to coding education, tied to Capital One Coders.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Brex demo day.</strong> Reggio's team shows the bank's integration engineers how Brex uses confidence scores to route PRs to expert reviewers.</p></div>
         </div>
       </div>
     </article>
@@ -361,10 +506,28 @@ body.presenting .present-bar{display:flex}
       <div class="file-head"><code>outbound/06-first-meeting.md</code><span class="ask">Part 2 · First meeting</span></div>
       <div class="file-body">
         <h3>The first meeting</h3>
-        <p class="q">The goal, the structure, and the next step we both agree to. The full call design is in the First call tab. <span class="draft">to write</span></p>
-        <p class="fund-note">Placeholder: short summary of goal, structure and agreed next step.</p>
+        <p class="q">30 minutes with McGarvey and her evaluation owner, plus our forward-deployed engineer. We leave with a dated, owned evaluation on Capital One's code. <a href="#call">How I'd run it</a></p>
+        <div class="agenda" role="list" aria-label="30-minute agenda">
+          <div role="listitem" style="flex:3"><span class="t">0–3</span><span class="b">Frame</span></div>
+          <div role="listitem" style="flex:10"><span class="t">3–13</span><span class="b">Confirm, don't ask</span></div>
+          <div role="listitem" style="flex:10"><span class="t">13–23</span><span class="b">Show it on their code</span></div>
+          <div role="listitem" style="flex:7"><span class="t">23–30</span><span class="b">Agree the evaluation</span></div>
+        </div>
+        <div class="leave">
+          <p class="stack"><strong>Leave with:</strong></p>
+          <ul class="checks">
+            <li><label><input type="checkbox" id="lw-owner"> The evaluation owner's name</label></li>
+            <li><label><input type="checkbox" id="lw-reviewer"> Which AI reviewer runs today, and how it's measured</label></li>
+            <li><label><input type="checkbox" id="lw-brex"> Where Brex lands in the integration</label></li>
+            <li><label><input type="checkbox" id="lw-deploy"> Cloud or self-hosted</label></li>
+            <li><label><input type="checkbox" id="lw-metric"> The success metric</label></li>
+            <li><label><input type="checkbox" id="lw-signer"> Who signs, and how security review works</label></li>
+          </ul>
+        </div>
+        <p class="stack"><strong>Agreed next step:</strong> a 30-day shadow-mode evaluation on the integration repos, with a named owner, written success criteria and a kickoff date; security review runs in parallel. Fallback: a technical session on their PRs within two weeks.</p>
         <div class="plus-layer" aria-label="Additions">
-          <div class="diff-row"><span class="gutter">+</span><p><strong>Confirm, don't ask.</strong> Research turns discovery into checking hypotheses, which frees half the meeting for their code. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Confirm, don't ask.</strong> Research turns discovery into checking hypotheses, which frees a third of the meeting for their code.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Bring Brex into the room.</strong> A peer inside their own company is stronger proof than anything we say about ourselves.</p></div>
         </div>
       </div>
     </article>
@@ -474,10 +637,12 @@ body.presenting .present-bar{display:flex}
 <dialog id="objections" aria-labelledby="obj-title">
   <header><h2 id="obj-title">Objections</h2><button type="button" class="btn ghost" id="objections-close">Close</button></header>
   <div class="body">
-    <details><summary>"We'll build it ourselves."</summary><p>Building is the easy part. The cost is maintenance, evals and inference management, every month, by engineers who could ship product. <span class="draft">draft</span></p></details>
-    <details><summary>"Copilot already reviews our PRs."</summary><p>The tool that writes the code shouldn't be the only one checking it. Greptile runs a different model than the one that wrote the change. <span class="draft">draft</span></p></details>
-    <details><summary>"Security won't let our code leave."</summary><p>Greptile offers a self-hosted option where the bank runs its own inference. <span class="draft">confirm with FDE</span></p></details>
-    <details><summary>"AI review is too noisy."</summary><p>About 1.5 comments per PR versus about 4 for CodeRabbit, plus a confidence score on each. <span class="draft">draft</span></p></details>
+    <details><summary>"We'll build it ourselves."</summary><p>Your own Brex team looked at building and chose Greptile. Mixpanel built one and found it costly, verbose and too expensive to run on every push. Coinbase builds its own agents but buys its reviewer. <a href="https://www.greptile.com/customers/brex" target="_blank" rel="noopener">Brex</a> · <a href="https://www.greptile.com/customers/mixpanel" target="_blank" rel="noopener">Mixpanel</a> · <a href="https://www.greptile.com/customers/coinbase" target="_blank" rel="noopener">Coinbase</a></p></details>
+    <details><summary>"Copilot already reviews our PRs."</summary><p>The tool that writes the code shouldn't be the only one checking it. Greptile runs a different model than the one that wrote the change.</p></details>
+    <details><summary>"We already have VulnHunter."</summary><p>VulnHunter audits code for exploits. Greptile reviews every change before merge, including VulnHunter's own fix PRs.</p></details>
+    <details><summary>"Security won't let our code leave."</summary><p>Greptile offers self-hosted and air-gapped deployment with custom models. <span class="draft">confirm details with FDE</span></p></details>
+    <details><summary>"We're regulated; we can't move this fast."</summary><p>Coinbase, also regulated, runs Greptile on 25,000+ PRs. The guardrails a bank already has are what make a shadow-mode pilot safe to start.</p></details>
+    <details><summary>"AI review is too noisy."</summary><p>About 1.5 comments per PR versus about 4 for CodeRabbit, plus a confidence score on each. Brex uses the scores to decide which PRs need an expert reviewer.</p></details>
   </div>
 </dialog>
 
@@ -505,10 +670,11 @@ body.presenting .present-bar{display:flex}
 
   // Land path
   var steps=[
-    "<strong>Brex engineering.</strong> AI-native, heavy Cursor use, and likely outside the bank's heaviest governance. Customer gains: review that keeps pace with AI-written code. Commit: $25k to start.",
-    "<strong>AI DevEx team.</strong> Owns AI coding tools and is chartered to make AI code review the enterprise default. Customer gains: a measured quality signal on every AI-written PR.",
-    "<strong>Hopper travel team and Discover integration.</strong> Inherited codebases where reviewers lack context. Customer gains: blast-radius checks across systems they didn't build.",
-    "<strong>Bank-wide commit.</strong> Usage outgrows the first commit; the renewal consolidates teams. Customer gains: one independent review layer across every coding tool."
+    "<strong>Keep: Brex.</strong> Live on 100% of Brex's code, 400+ engineers. Customer gains: keeps a reviewer its engineers chose; Capital One skips a migration. Commercial: renew through integration.",
+    "<strong>Land: the Brex and Capital One integration repos.</strong> The one place both codebases meet, so cross-repo context matters most. Customer gains: catches cross-system breakage in code no single team fully knows. Commercial: first Capital One commit, $25k minimum.",
+    "<strong>Prove: the DevEx bake-off.</strong> A head-to-head against Copilot review and the in-house reviewer, on Capital One's own PRs. Customer gains: an enterprise-default decision made on their data, scored on signal-to-noise.",
+    "<strong>Expand: Hopper, the Discover migration, Capital One Software.</strong> Teams working in inherited or customer-facing code. Customer gains: blast-radius checks on systems they didn't build. Commercial: usage grows past the commit.",
+    "<strong>Standardize: the enterprise default.</strong> ~14,000 technologists under Enterprise Platforms. Customer gains: one independent review layer across Copilot, Claude Code and Windsurf. Commercial: an enterprise agreement; Brex folds in."
   ];
   var detail=document.getElementById('step-detail');
   function showStep(i){
@@ -518,33 +684,49 @@ body.presenting .present-bar{display:flex}
   document.querySelectorAll('.step').forEach(function(s,i){s.addEventListener('click',function(){showStep(i);});});
   showStep(0);
 
-  // Stakeholders
-  var people=[
-    {role:"Sr. Manager, AI DevEx",tag:"Champion",cls:"champ",d:"Owns AI coding tools and must prove their ROI. Greptile gives that team the quality data it's chartered to produce. Reach: an insight on AI-written PR quality, then a shadow-mode pilot offer."},
-    {role:"Brex CTO",tag:"Land sponsor",cls:"champ",d:"Runs a team where over 45% of code changes are AI-written. Cares about shipping speed without regressions. Reach: what Greptile catches on AI-heavy PRs."},
-    {role:"Head of Enterprise Platforms / CTO org",tag:"Economic buyer",cls:"",d:"Signs the enterprise commit. Cares about integration risk across Discover, Brex and Hopper. Reach: through the champion, with the inherited-code story. Name to confirm in discovery."},
-    {role:"CISO org",tag:"Potential blocker",cls:"block",d:"Will review data handling and model use. Already invested in AI code security via VulnHunter. Reach: position Greptile beside VulnHunter, with the self-hosted option."},
-    {role:"Lead AI Engineer, code quality",tag:"Potential blocker",cls:"block",d:"Hired to build AI code-quality tools in-house. Reach: make Greptile the layer that team builds on, so it adds to their mandate instead of competing with it."}
-  ];
-  var wrap=document.getElementById('people'), pd=document.getElementById('person-detail');
-  people.forEach(function(p,i){
-    var b=document.createElement('button');
-    b.type='button';b.className='person';b.setAttribute('aria-expanded','false');
-    b.innerHTML='<span class="role">'+p.role+'</span><span class="tag '+p.cls+'">'+p.tag+'</span>';
-    b.addEventListener('click',function(){
-      wrap.querySelectorAll('.person').forEach(function(x){x.setAttribute('aria-expanded',String(x===b));});
-      pd.textContent=p.d;
+  // Org chart: who matters at each stage
+  var stages={
+    all:{lead:[],yes:[],block:[],infl:[],text:"Pick a stage to see who leads it, who must say yes, and who could block it."},
+    keep:{lead:['reggio'],yes:['franceschi'],block:[],infl:[],text:"<strong>Keep Brex.</strong> Leads: James Reggio. Must say yes: Pedro Franceschi. Could block: DevEx standardizing on another reviewer."},
+    land:{lead:['reggio','integration'],yes:[],block:['nims'],infl:[],text:"<strong>Land the integration repos.</strong> Leads: Reggio, with the bank's integration lead (unnamed). Must say yes: whoever owns Brex integration (unknown; Matthew Cooper runs Discover's). Could block: Chris Nims's org, on data handling."},
+    prove:{lead:['devex'],yes:['mcgarvey'],block:['mlx'],infl:['kanat'],text:"<strong>Prove it in a DevEx bake-off.</strong> Leads: the AI DevEx manager (unnamed). Must say yes: Catherine McGarvey. Could block: the MLX review lead, whose build is the rival. Influence: Max Kanat-Alexander."},
+    expand:{lead:[],yes:[],block:['west'],infl:[],text:"<strong>Expand.</strong> Leads: Hopper, Discover and Capital One Software engineering leads (off the chart). Must say yes: Ravi Raghu, for Capital One Software. Could block: Kara West's vendor risk review."},
+    standardize:{lead:['mcgarvey'],yes:['paleja','alexander'],block:['west'],infl:[],text:"<strong>Standardize.</strong> Leads: McGarvey. Must say yes: Ameesh Paleja, then Rob Alexander. Could block: procurement and vendor risk."}
+  };
+  var org=document.getElementById('org'), sd=document.getElementById('stage-detail');
+  var stageBtns=document.querySelectorAll('.stages button');
+  function showStage(name){
+    var st=stages[name];
+    stageBtns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.stage===name));});
+    org.classList.toggle('staged',name!=='all');
+    org.querySelectorAll('.node').forEach(function(n){
+      var id=n.getAttribute('data-id');
+      n.classList.remove('is-lead','is-yes','is-block','is-infl');
+      if(st.lead.indexOf(id)>-1)n.classList.add('is-lead');
+      if(st.yes.indexOf(id)>-1)n.classList.add('is-yes');
+      if(st.block.indexOf(id)>-1)n.classList.add('is-block');
+      if(st.infl.indexOf(id)>-1)n.classList.add('is-infl');
     });
-    wrap.appendChild(b);
+    sd.innerHTML=st.text;
+  }
+  stageBtns.forEach(function(b){b.addEventListener('click',function(){showStage(b.dataset.stage);});});
+  showStage('all');
+
+  // Outbound touches
+  document.querySelectorAll('.touches button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var li=b.parentElement, open=li.classList.toggle('open');
+      b.setAttribute('aria-expanded',String(open));
+    });
   });
 
   // Discovery questions
   var qs=[
-    {q:"Is Copilot the main AI coding tool at Capital One?",y:"Lead with independence: a different model checks what Copilot writes.",n:"Find out which tool, and adjust the model-inversion story to match."},
-    {q:"Does Brex still run its own GitHub org and tooling?",y:"Brex is the land. Self-serve trial can start this month.",n:"Shift the land to Hopper's travel team or Capital One Software."},
+    {q:"Is Brex staying on its own tooling after integration?",y:"Expand outward from Brex and use it as the internal reference.",n:"Urgent: get Greptile into DevEx's evaluation now, or lose Brex when it migrates."},
+    {q:"Is Copilot code review the AI reviewer in your pipeline today?",y:"Lead with independence: a different model checks what Copilot writes.",n:"It's the in-house reviewer or something else; go to the next question."},
+    {q:"Is the in-house MLX reviewer in production with quality metrics?",y:"Propose a head-to-head on their own PRs, judged on signal-to-noise.",n:"Position Greptile as the base they build on; bring the Mixpanel and Coinbase stories."},
     {q:"Can code leave Capital One's network for review?",y:"Cloud deployment; fastest path to a pilot.",n:"Self-hosted from day one; bring the FDE into the first technical call."},
-    {q:"Is the in-house code quality team building a PR reviewer?",y:"Position Greptile as the base they build on, and run a head-to-head eval.",n:"Build-vs-buy fades; focus on speed to value."},
-    {q:"Does DevEx own the AI coding tools budget?",y:"DevEx owns it: champion and buyer sit close together, shorter cycle.",n:"Map the path to the platform or CTO org early; plan for a longer cycle."}
+    {q:"Does DevEx own the AI coding tools budget?",y:"Champion and buyer sit close together; shorter cycle.",n:"Map the path to Paleja's org early; plan for a longer cycle."}
   ];
   var ql=document.getElementById('qs');
   qs.forEach(function(item){
