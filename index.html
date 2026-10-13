@@ -167,6 +167,7 @@ dialog summary{cursor:pointer;font-weight:700}
 
 .view[hidden]{display:none}
 .print-only{display:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .stack{font-size:15px;margin:0 0 14px}
 .stack strong{font-weight:700}
 .footnote{font-size:13px;color:var(--muted);margin:10px 0 0}
@@ -256,6 +257,7 @@ body.presenting .present-bar{display:flex}
   .timeline .detail,.qs .ans,.qs .impact,.step-detail,.fund-note,
   .stages,.org-scroll,.stage-detail,.footnote,.touches .msg,.checks input{display:none!important}
   .print-only{display:block!important}
+  .roles.sr-only{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal}
   .pr{position:static;border:0}
   .pr-inner{padding:0 0 3pt}
   .pr-title{font-size:14pt}
@@ -405,7 +407,7 @@ body.presenting .present-bar{display:flex}
           <button type="button" aria-pressed="false" data-stage="standardize">Standardize</button>
         </div>
         <div class="org-scroll">
-          <svg class="org" id="org" viewBox="0 0 760 530" role="img" aria-labelledby="org-title">
+          <svg class="org" id="org" viewBox="0 0 760 530" role="img" aria-labelledby="org-title" aria-describedby="org-roles">
             <title id="org-title">Org chart: 12 people at Capital One and Brex, with three unnamed roles</title>
             <rect class="org-box" x="16" y="8" width="516" height="448" rx="10"/>
             <text class="org-label" x="28" y="30">Capital One</text>
@@ -438,7 +440,7 @@ body.presenting .present-bar{display:flex}
           </svg>
         </div>
         <div class="stage-detail" id="stage-detail" aria-live="polite"></div>
-        <ul class="print-only roles">
+        <ul class="roles sr-only" id="org-roles">
           <li><strong>Champions:</strong> James Reggio (Brex CTO), AI DevEx manager*, bank-side integration lead*</li>
           <li><strong>Decide or sponsor:</strong> Catherine McGarvey (SVP DevEx), Ameesh Paleja (EVP Enterprise Platforms), Rob Alexander (CIO), Matthew Cooper, Pedro Franceschi</li>
           <li><strong>Gates or could block:</strong> Chris Nims (CISO), Kara West (Risk), MLX review lead*</li>
