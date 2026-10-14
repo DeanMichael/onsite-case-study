@@ -216,6 +216,47 @@ dialog summary{cursor:pointer;font-weight:700}
 .touches>li.open .msg{display:block}
 .touches .msg p{margin:0 0 8px} .touches .msg ul{margin:0 0 8px;padding-left:20px}
 .touches .subj{font:400 13px var(--mono);color:var(--muted)}
+/* presentation slides */
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.quotes figure{margin:0;padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--page);display:flex;flex-direction:column;gap:10px}
+.quotes blockquote{margin:0;font:700 18px/1.3 var(--body)}
+.quotes figcaption{font-size:13px;color:var(--muted)}
+.arch-scroll{overflow-x:auto;margin:0 0 14px}
+.arch{display:block;width:100%;min-width:600px;height:auto;font-family:var(--body)}
+.arch .net{fill:none;stroke:var(--muted);stroke-width:1.25;stroke-dasharray:6 5}
+.arch .net-label{font-size:12px;font-weight:700;fill:var(--muted)}
+.arch .box rect{fill:var(--page);stroke:var(--line);stroke-width:1.5}
+.arch .box.core rect{fill:var(--add-bg);stroke:var(--add);stroke-width:2}
+.arch text{font-size:12.5px;fill:var(--muted)}
+.arch .b{font-size:14px;font-weight:700;fill:var(--ink)}
+.arch .flow path{fill:none;stroke:var(--muted);stroke-width:1.5}
+.arch .arrowhead{fill:var(--muted)}
+.arch .t{font:700 11.5px var(--mono);fill:var(--add)}
+.facts{margin:0 0 10px;padding-left:20px;font-size:15px}
+.facts li{margin-bottom:6px}
+.live-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 12px}
+.live-row .btn{text-decoration:none}
+.live-note{font-size:15px;color:var(--muted);flex:1;min-width:220px}
+.rehearsal{margin:0 0 16px}
+.rehearsal summary{cursor:pointer;font-weight:600;font-size:15px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 10px}
+.vs>div{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--page);font-size:15px}
+.vs .vs-g{border-color:var(--add-line);background:var(--add-bg)}
+.vs p{margin:6px 0 0}
+.vs-k{font:700 12px var(--mono);color:var(--muted)}
+.vs .vs-g .vs-k{color:var(--add)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 12px}
+.stats>div{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.stats .n{display:block;font:800 26px/1 var(--display);font-stretch:110%}
+.stats .l{font-size:13px;color:var(--muted)}
+.eval{list-style:none;margin:0 0 6px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.eval li{padding:12px 14px;background:var(--navy-bg);border-radius:6px}
+.eval .k{display:block;font:700 12px var(--mono);color:var(--navy)}
+.eval .d{display:block;font-size:14px;line-height:1.35;margin-top:4px}
+.aud{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.aud button{font:600 13px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.aud button[aria-pressed="true"]{background:var(--ink);color:var(--page);border-color:var(--ink)}
+.aud-detail{padding:12px 14px;border-radius:8px;background:var(--page);border:1px solid var(--line);font-size:15px;margin:0 0 12px}
 /* first meeting */
 .agenda{display:flex;gap:3px;margin:0 0 14px}
 .agenda>div{background:var(--navy-bg);border-radius:6px;padding:8px 10px;min-width:0}
@@ -241,6 +282,7 @@ body.presenting .present-bar{display:flex}
   .path{grid-template-columns:1fr 1fr}
   .path .step:last-child{grid-column:1/-1}
   .checks{grid-template-columns:1fr}
+  .quotes,.vs,.stats,.eval{grid-template-columns:1fr}
   .agenda .b{font-size:12px}
   .step,.step:first-child,.step:last-child{border:1px solid var(--line);border-radius:0}
   .calc{grid-template-columns:1fr}
@@ -312,11 +354,11 @@ body.presenting .present-bar{display:flex}
       <button type="button" data-mode="plus" aria-pressed="false">Fundamentals + plus</button>
     </div>
     <button type="button" class="btn ghost" id="objections-open">Objections</button>
-    <button type="button" class="btn" id="present">Present the call</button>
+    <button type="button" class="btn" id="present">Present</button>
   </div>
   <nav class="pr-tabs" aria-label="Deliverables">
     <a href="#plan" data-view="plan" aria-current="page">Account plan <span class="count">1 page</span></a>
-    <a href="#call" data-view="call">First call <span class="count">5 slides</span></a>
+    <a href="#call" data-view="call">The presentation <span class="count">5 slides</span></a>
   </nav>
 </header>
 
@@ -386,7 +428,7 @@ body.presenting .present-bar{display:flex}
         <div class="step-detail" id="step-detail" aria-live="polite"></div>
         <div class="plus-layer" aria-label="Additions">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Review for code you inherited.</strong> Brex, Hopper and Discover are each a land with its own leader and deadline.</p></div>
-          <div class="diff-row"><span class="gutter">+</span><p><strong>Shadow-mode pilot.</strong> Greptile reviews quietly for 30 days; the findings become the business case.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Evaluate the way they already evaluate.</strong> Public code first, then their AI-tool sandbox on synthetic or anonymized code while security review runs, then self-hosted on real repos. Nothing proprietary leaves the bank until risk signs off.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>A bake-off they already expect.</strong> Capital One's tool funnel is built for head-to-head trials, so we ask for one on their PRs.</p></div>
         </div>
       </div>
@@ -489,7 +531,7 @@ body.presenting .present-bar{display:flex}
           <li><button type="button" aria-expanded="false"><span class="when">Day 4 · LinkedIn</span> <span class="what">The peer framing</span> <span class="cta">Ask: compare notes</span></button>
             <div class="msg"><p>Hey Catherine - sent you a note on the AI review results Brex is seeing. Your team's goal of making AI review the enterprise default is close to what Brex already did. Worth comparing notes?</p></div></li>
           <li><button type="button" aria-expanded="false"><span class="when">Day 9 · Email</span> <span class="what">A concrete evaluation design</span> <span class="cta">Ask: who runs evaluations?</span></button>
-            <div class="msg"><p>Hi Catherine,</p><p>Here's how a head-to-head on Capital One's own PRs could run: 30 days, Greptile in shadow mode next to your current reviewer, findings posted to a dashboard instead of the PRs, scored on signal-to-noise. Your team keeps the data either way.</p><p>Who on your team runs AI tool evaluations? Happy to send them the full design.</p><p>Best,<br>Dean</p></div></li>
+            <div class="msg"><p>Hi Catherine,</p><p>Here's how a head-to-head could fit your AI tool review process: Capital One's public repos first, then your AI sandbox on synthetic or anonymized code while security review runs, and a self-hosted run on real repos only after approval, scored on signal-to-noise against your current reviewer. Your team keeps the data either way.</p><p>Who on your team runs AI tool evaluations? Happy to send them the full design.</p><p>Best,<br>Dean</p></div></li>
         </ol>
         <p class="stack"><strong>Educate before the meeting:</strong> executives get a one-page build-vs-buy on Capital One's posted salary bands plus Brex's numbers; engineers get Greptile's reviews on a public Capital One repo and the free trial.</p>
         <div class="plus-layer" aria-label="Additions">
@@ -506,7 +548,7 @@ body.presenting .present-bar{display:flex}
       <div class="file-head"><code>outbound/06-first-meeting.md</code><span class="ask">Part 2 · First meeting</span></div>
       <div class="file-body">
         <h3>The first meeting</h3>
-        <p class="q">30 minutes with McGarvey and her evaluation owner, plus our forward-deployed engineer. We leave with a dated, owned evaluation on Capital One's code. <a href="#call">How I'd run it</a></p>
+        <p class="q">30 minutes with McGarvey and her evaluation owner, plus our forward-deployed engineer. We leave with a dated, owned evaluation on Capital One's code. <a href="#call">How I'd present Greptile</a></p>
         <div class="agenda" role="list" aria-label="30-minute agenda">
           <div role="listitem" style="flex:3"><span class="t">0–3</span><span class="b">Frame</span></div>
           <div role="listitem" style="flex:10"><span class="t">3–13</span><span class="b">Confirm, don't ask</span></div>
@@ -524,7 +566,7 @@ body.presenting .present-bar{display:flex}
             <li><label><input type="checkbox" id="lw-signer"> Who signs, and how security review works</label></li>
           </ul>
         </div>
-        <p class="stack"><strong>Agreed next step:</strong> a 30-day shadow-mode evaluation on the integration repos, with a named owner, written success criteria and a kickoff date; security review runs in parallel. Fallback: a technical session on their PRs within two weeks.</p>
+        <p class="stack"><strong>Agreed next step:</strong> a written evaluation plan that runs alongside security review: results on Capital One's public repos, then a 30-day evaluation in their AI-tool sandbox, then self-hosted on the integration repos once risk approves. Named owner, success criteria, kickoff date. Fallback: a technical session on Capital One's public repos within two weeks.</p>
         <div class="plus-layer" aria-label="Additions">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Confirm, don't ask.</strong> Research turns discovery into checking hypotheses, which frees a third of the meeting for their code.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>Bring Brex into the room.</strong> A peer inside their own company is stronger proof than anything we say about ourselves.</p></div>
@@ -537,52 +579,105 @@ body.presenting .present-bar{display:flex}
 
 <div class="wrap view" id="view-call" hidden>
   <section class="open" aria-label="Opening">
-    <p class="lead">The first call, in five slides.</p>
-    <p class="sub">How I'd run the first meeting with Capital One's engineering leadership: what I show them, how they prove it to themselves, and how one person leaves ready to sell it internally. <span class="draft">copy to revisit</span></p>
+    <p class="lead">Greptile, presented to Capital One, in five slides.</p>
+    <p class="sub">How I'd present the technology to Capital One's engineering leadership: their problem in their own words, how Greptile works, a live review on their code, the value, and what lets one person carry it internally.</p>
   </section>
 
   <nav class="files" aria-label="Slides">
-    <h2>The call</h2>
+    <h2>The presentation</h2>
     <ol>
-      <li><a href="#slide-agenda">The call on one screen</a></li>
-      <li><a href="#slide-show">Show it on their code<span class="stat">+2</span></a></li>
-      <li><a href="#slide-prove">Prove it</a></li>
-      <li><a href="#slide-champion">Win a champion<span class="stat">+1</span></a></li>
-      <li><a href="#slide-next">The agreed next step</a></li>
+      <li><a href="#slide-problem">The problem<span class="stat">+1</span></a></li>
+      <li><a href="#slide-how">How Greptile works<span class="stat">+1</span></a></li>
+      <li><a href="#slide-live">Show it, live<span class="stat">+2</span></a></li>
+      <li><a href="#slide-prove">Prove the value<span class="stat">+1</span></a></li>
+      <li><a href="#slide-champion">Win a champion<span class="stat">+2</span></a></li>
     </ol>
   </nav>
 
   <div class="files-content">
-    <article class="file slide" id="slide-agenda">
-      <div class="file-head"><code>call/1-agenda.md</code><span class="ask">Part 3 · Call structure</span></div>
+    <article class="file slide" id="slide-problem">
+      <div class="file-head"><code>call/1-the-problem.md</code><span class="ask">Part 3 · Setup</span></div>
       <div class="file-body">
-        <h3>The call on one screen</h3>
-        <p class="q">The agenda with time blocks, and what I need to leave with. <span class="draft">content to come</span></p>
-        <p class="fund-note">Placeholder: timed agenda and "leave with" checklist.</p>
+        <h3>AI is writing code faster than Capital One can review it</h3>
+        <p class="q">Three of these are Capital One leaders speaking in public. The fourth, from Brex, shows where the industry already is.</p>
+        <div class="quotes">
+          <figure><blockquote>"The defects that you see and the incidents you see are deployment related."</blockquote><figcaption>Ameesh Paleja, EVP Enterprise Platforms, on ~14,000 technologists shipping through one pipeline · <a href="https://linearb.io/dev-interrupted/podcast/capital-one-standardized-pipeline-ameesh-paleja" target="_blank" rel="noopener">Dev Interrupted</a></figcaption></figure>
+          <figure><blockquote>Pull requests sat in backlogs long enough that Capital One retired an AI tool over it.</blockquote><figcaption>Catherine McGarvey, SVP Developer Experience · <a href="https://thenewstack.io/capital-one-developer-enablement/" target="_blank" rel="noopener">The New Stack</a></figcaption></figure>
+          <figure><blockquote>"Over 45% of our code changes are now fully written by AI."</blockquote><figcaption>James Reggio, CTO, Brex · <a href="https://cursor.com/customers/upwork" target="_blank" rel="noopener">Cursor</a></figcaption></figure>
+          <figure><blockquote>"We need to speed up code review velocity."</blockquote><figcaption>Max Kanat-Alexander, Executive Distinguished Engineer, Capital One · <a href="https://github.com/The-Focus-AI/2025-11-20-ai-engineering-code-summit/blob/main/2025-11-20.md" target="_blank" rel="noopener">AI Engineer Code Summit notes</a></figcaption></figure>
+        </div>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>The demo starts here.</strong> I open a pull request on Capital One's code as this slide comes up; Greptile reviews it while we talk, and we read the result on slide 3.</p></div>
+        </div>
       </div>
     </article>
 
-    <article class="file slide" id="slide-show">
-      <div class="file-head"><code>call/2-show.md</code><span class="ask">Part 3 · Show, don't tell</span></div>
+    <article class="file slide" id="slide-how">
+      <div class="file-head"><code>call/2-how-it-works.md</code><span class="ask">Part 3 · The technology</span></div>
       <div class="file-body">
-        <h3>Show it on their code</h3>
-        <p class="q">Greptile's reviews on a public Capital One repo, linked to the originals. <span class="draft">content to come</span></p>
-        <div class="review">
-          <span class="who">greptile-bot</span><span class="conf">confidence 4/5</span>
-          <p>Placeholder: a Greptile review from a public Capital One PR goes here, linked to the original. <span class="draft">to add</span></p>
+        <h3>How Greptile works</h3>
+        <p class="q">Every pull request, reviewed with the context of the whole codebase, tuned to the team's standards, and able to run entirely inside Capital One's network.</p>
+        <div class="arch-scroll">
+          <svg class="arch" viewBox="0 0 760 250" role="img" aria-labelledby="arch-title" aria-describedby="arch-desc">
+            <title id="arch-title">How a Greptile review works</title>
+            <desc id="arch-desc">A pull request from any coding tool goes to Greptile, which combines a graph of the whole codebase, the team's custom rules and team feedback, and returns a review in the pull request in about three minutes. In the self-hosted option, all of it runs inside Capital One's network.</desc>
+            <defs><marker id="arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrowhead"/></marker></defs>
+            <rect class="net" x="8" y="8" width="744" height="234" rx="12"/>
+            <text class="net-label" x="24" y="32">Capital One's network (self-hosted option)</text>
+            <g class="box"><rect x="24" y="72" width="168" height="112" rx="10"/><text class="b" x="40" y="100">Pull request</text><text x="40" y="122">Written by a person,</text><text x="40" y="140">Copilot, Claude Code</text><text x="40" y="158">or Windsurf</text></g>
+            <g class="box core"><rect x="252" y="56" width="256" height="144" rx="10"/><text class="b" x="268" y="84">Greptile</text><text x="268" y="108">Graph of the whole codebase</text><text x="268" y="128">Capital One's custom rules</text><text x="268" y="148">Team feedback, learned over time</text><text x="268" y="168">Different model than the one</text><text x="268" y="186">that wrote the code</text></g>
+            <g class="box"><rect x="568" y="72" width="168" height="112" rx="10"/><text class="b" x="584" y="100">Review in the PR</text><text x="584" y="122">Summary and diagram</text><text x="584" y="140">Severity, confidence</text><text x="584" y="158">Fix with your agent</text></g>
+            <g class="flow"><path d="M192 128H250" marker-end="url(#arch-arrow)"/><path d="M508 128H566" marker-end="url(#arch-arrow)"/></g>
+            <text class="t" x="512" y="118">~3 min</text>
+          </svg>
         </div>
+        <ul class="facts">
+          <li><strong>Context:</strong> a graph of functions, classes and dependencies, so each review sees how a change affects code far from the diff.</li>
+          <li><strong>Learns the team:</strong> reactions and replies tune it, and within two to three weeks it stops flagging what the team ignores. Custom rules encode Capital One's own standards.</li>
+          <li><strong>Deploys where risk wants it:</strong> Greptile Cloud (SOC 2 Type II, SSO/SAML, audit logs) or self-hosted on Docker or Kubernetes, including air-gapped with custom models. Works with GitHub Enterprise Server, GitLab self-managed and Bitbucket Data Center.</li>
+        </ul>
+        <p class="footnote">Sources: <a href="https://www.greptile.com/docs" target="_blank" rel="noopener">Greptile docs</a> · <a href="https://www.greptile.com/docs/security/selfhost" target="_blank" rel="noopener">self-hosting</a>. Model setup to confirm with an FDE.</p>
         <div class="plus-layer" aria-label="Additions">
-          <div class="diff-row"><span class="gutter">+</span><p><strong>This site was reviewed by Greptile.</strong> Every change went through a PR on GitHub. The reviews are public. <span class="draft">draft</span></p></div>
-          <div class="diff-row"><span class="gutter">+</span><p><strong>VulnHunter's repo, reviewed.</strong> Greptile on the CISO's own open-source project. <span class="draft">draft</span></p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>An independent reviewer.</strong> The tool that writes the code shouldn't be the only one checking it. Greptile reviews Copilot, Claude Code and Windsurf output alike.</p></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="file slide" id="slide-live">
+      <div class="file-head"><code>call/3-show-it-live.md</code><span class="ask">Part 3 · Item 7, show don't tell</span></div>
+      <div class="file-body">
+        <h3>Show it, live</h3>
+        <p class="q">Don't take my word for it. Here's Greptile on Capital One's own code: VulnHunter, the CISO org's open-source security scanner, replayed in a private repo.</p>
+        <div class="live-row">
+          <a class="btn" href="https://github.com/DeanMichael/vulnhunter-greptile/pull/5" target="_blank" rel="noopener">Open the live PR</a>
+          <span class="live-note">Opened on slide 1. A four-line fix meant to keep OAuth client secrets out of logs. A human reviewer needed two rounds over about ten weeks to get it right.</span>
+        </div>
+        <details class="rehearsal">
+          <summary>Backup: what Greptile said in rehearsal</summary>
+          <div class="review">
+            <span class="who">greptile-apps</span><span class="conf">confidence 3/5 · posted 3 min after open</span>
+            <p><strong>Quoted secrets stay visible.</strong> "The new pattern leaves both <code>{"client_secret": "s3cr3t"}</code> and <code>client_secret="s3cr3t"</code> unchanged… Secrets in common JSON, dictionary, and configuration text can therefore remain readable in logs and audit files."</p>
+          </div>
+        </details>
+        <h4>Then the depth: VulnHunter PR 10</h4>
+        <p class="stack">Opened July 18. Human reviewers requested changes on October 7, and the author's fix that day changed two things. Greptile flagged both on the July 18 code.</p>
+        <div class="vs">
+          <div><span class="vs-k">Fixed after human review, day 81</span><p>Added <code>--setting-sources user</code>, so the scanned repo's hooks can't run on the host</p><p>Added <code>--tools</code> as the hard boundary; <code>--allowedTools</code> only pre-approves</p></div>
+          <div class="vs-g"><span class="vs-k">Flagged by Greptile, day 1</span><p>"Repository hooks still run." Proposed fix: "Add <code>--setting-sources user</code>."</p><p>"Extra tools remain available." Same diagnosis.</p></div>
+        </div>
+        <p class="footnote">And a miss, named up front: on PR 9, Greptile didn't catch a table-cell injection a human found. It complements human review; it doesn't replace it.</p>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>A fair replay.</strong> Each PR was replayed at its state before human review, on its original base commit, with a neutral description.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>This site, reviewed too.</strong> Every change to this presentation went through Greptile. On the first PR it caught a P1 bug in presenter mode. <a href="https://github.com/DeanMichael/onsite-case-study/pull/1" target="_blank" rel="noopener">PR #1</a></p></div>
         </div>
       </div>
     </article>
 
     <article class="file slide" id="slide-prove">
-      <div class="file-head"><code>call/3-prove-it.md</code><span class="ask">Part 3 · Item 7</span></div>
+      <div class="file-head"><code>call/4-prove-the-value.md</code><span class="ask">Part 3 · Item 7, ROI</span></div>
       <div class="file-body">
-        <h3>Prove it</h3>
-        <p class="q">Build versus buy, using Capital One's own posted salaries. Move the sliders.</p>
+        <h3>Prove the value</h3>
+        <p class="q">Build versus buy, on Capital One's own posted salaries, next to results from inside Capital One. Move the sliders.</p>
         <div class="calc">
           <div>
             <label>Engineers to build and maintain an internal reviewer: <output id="o-eng">3</output>
@@ -597,30 +692,45 @@ body.presenting .present-bar{display:flex}
             <div class="row"><span>Greptile minimum commit</span><strong>$25,000</strong></div>
             <div style="margin-top:14px">Building costs</div>
             <div class="big" id="r-mult"></div>
-            <small>Salary range anchored to Capital One's posted bands ($179k to $335k base). Inference and commit size are placeholders until discovery. <span class="draft">draft</span></small>
+            <small>Salary range anchored to Capital One's posted bands ($179k to $335k base). Inference and commit size are placeholders until discovery.</small>
           </div>
+        </div>
+        <div class="stats">
+          <div><span class="n">100%</span><span class="l">of Brex's code reviewed by Greptile</span></div>
+          <div><span class="n">~8,200</span><span class="l">issues caught a month at Brex</span></div>
+          <div><span class="n">~30%</span><span class="l">faster merges at Brex</span></div>
+        </div>
+        <p class="stack"><strong>Peers who tried building:</strong> Mixpanel built a reviewer and found it costly, verbose and too expensive to run on every push. Coinbase, also regulated, builds its own agents but buys its reviewer. <a href="https://www.greptile.com/customers/brex" target="_blank" rel="noopener">Brex</a> · <a href="https://www.greptile.com/customers/mixpanel" target="_blank" rel="noopener">Mixpanel</a> · <a href="https://www.greptile.com/customers/coinbase" target="_blank" rel="noopener">Coinbase</a></p>
+        <p class="stack"><strong>How they'd check it themselves:</strong> signal-to-noise (comments acted on versus dismissed), issues caught before merge that humans missed, and time to merge.</p>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Their own success test.</strong> McGarvey: "If we can't clearly tell whether we've made something better, we probably haven't." The evaluation is built to answer exactly that.</p></div>
         </div>
       </div>
     </article>
 
     <article class="file slide" id="slide-champion">
-      <div class="file-head"><code>call/4-champion.md</code><span class="ask">Part 3 · Item 8</span></div>
+      <div class="file-head"><code>call/5-win-a-champion.md</code><span class="ask">Part 3 · Item 8</span></div>
       <div class="file-body">
         <h3>Win a champion</h3>
-        <p class="q">How one meeting turns one person into an internal seller. <span class="draft">content to come</span></p>
-        <p class="fund-note">Placeholder: champion kit with audience switch (CISO, VP Eng, CFO).</p>
-        <div class="plus-layer" aria-label="Additions">
-          <div class="diff-row"><span class="gutter">+</span><p><strong>Give them the deck they'd write.</strong> The champion leaves with a forwardable page built on their own team's numbers. <span class="draft">draft</span></p></div>
+        <p class="q">The AI DevEx manager leaves able to run the evaluation and defend it in every room it has to pass through, without me there.</p>
+        <h4>An evaluation that fits Capital One's AI-tool review</h4>
+        <ol class="eval">
+          <li><span class="k">1 · Public code</span><span class="d">Greptile on Capital One's open-source repos. Nothing proprietary leaves the bank.</span></li>
+          <li><span class="k">2 · Their AI sandbox</span><span class="d">Synthetic or anonymized code, while security and vendor risk review runs.</span></li>
+          <li><span class="k">3 · Self-hosted</span><span class="d">Inside Capital One's network, on the first team's repos, once risk approves.</span></li>
+        </ol>
+        <h4>A one-pager for every room</h4>
+        <div class="aud" role="group" aria-label="Audience">
+          <button type="button" aria-pressed="true" data-aud="ciso">CISO org</button>
+          <button type="button" aria-pressed="false" data-aud="platforms">Enterprise Platforms</button>
+          <button type="button" aria-pressed="false" data-aud="finance">Finance and procurement</button>
         </div>
-      </div>
-    </article>
-
-    <article class="file slide" id="slide-next">
-      <div class="file-head"><code>call/5-next-step.md</code><span class="ask">Part 3 · Close</span></div>
-      <div class="file-body">
-        <h3>The agreed next step</h3>
-        <p class="q">The mutual plan left on the table, with dates and owners. <span class="draft">content to come</span></p>
-        <p class="fund-note">Placeholder: mutual plan, such as a shadow-mode pilot.</p>
+        <div class="aud-detail" id="aud-detail" aria-live="polite"></div>
+        <p class="stack"><strong>Proof from inside:</strong> Brex's results, an intro to Reggio's team, and the VulnHunter replay, shared privately with the CISO org.</p>
+        <div class="plus-layer" aria-label="Additions">
+          <div class="diff-row"><span class="gutter">+</span><p><strong>The champion authors the evaluation.</strong> A well-run evaluation makes them look good whatever the result, which is why they'll carry it.</p></div>
+          <div class="diff-row"><span class="gutter">+</span><p><strong>Start where approval already exists.</strong> Brex passed a vendor review for Greptile. Whether it carries over inside a bank is the first thing to confirm.</p></div>
+        </div>
       </div>
     </article>
   </div>
@@ -641,7 +751,7 @@ body.presenting .present-bar{display:flex}
     <details><summary>"Copilot already reviews our PRs."</summary><p>The tool that writes the code shouldn't be the only one checking it. Greptile runs a different model than the one that wrote the change.</p></details>
     <details><summary>"We already have VulnHunter."</summary><p>VulnHunter audits code for exploits. Greptile reviews every change before merge, including VulnHunter's own fix PRs.</p></details>
     <details><summary>"Security won't let our code leave."</summary><p>Greptile offers self-hosted and air-gapped deployment with custom models. <span class="draft">confirm details with FDE</span></p></details>
-    <details><summary>"We're regulated; we can't move this fast."</summary><p>Coinbase, also regulated, runs Greptile on 25,000+ PRs. The guardrails a bank already has are what make a shadow-mode pilot safe to start.</p></details>
+    <details><summary>"We're regulated; we can't move this fast."</summary><p>Coinbase, also regulated, runs Greptile on 25,000+ PRs. And the evaluation runs inside your own process: public code first, your AI sandbox during security review, self-hosted after approval.</p></details>
     <details><summary>"AI review is too noisy."</summary><p>About 1.5 comments per PR versus about 4 for CodeRabbit, plus a confidence score on each. Brex uses the scores to decide which PRs need an expert reviewer.</p></details>
   </div>
 </dialog>
@@ -671,8 +781,8 @@ body.presenting .present-bar{display:flex}
   // Land path
   var steps=[
     "<strong>Keep: Brex.</strong> Live on 100% of Brex's code, 400+ engineers. Customer gains: keeps a reviewer its engineers chose; Capital One skips a migration. Commercial: renew through integration.",
-    "<strong>Land: the Brex and Capital One integration repos.</strong> The one place both codebases meet, so cross-repo context matters most. Customer gains: catches cross-system breakage in code no single team fully knows. Commercial: first Capital One commit, $25k minimum.",
-    "<strong>Prove: the DevEx bake-off.</strong> A head-to-head against Copilot review and the in-house reviewer, on Capital One's own PRs. Customer gains: an enterprise-default decision made on their data, scored on signal-to-noise.",
+    "<strong>Land: the Brex and Capital One integration repos.</strong> The one place both codebases meet, so cross-repo context matters most, self-hosted once security review clears. Customer gains: catches cross-system breakage in code no single team fully knows. Commercial: extend Brex's agreement, or a first Capital One commit at the $25k minimum.",
+    "<strong>Prove: the DevEx bake-off.</strong> A head-to-head against Copilot review and the in-house reviewer, run through Capital One's AI-tool review: public code, then their sandbox, then self-hosted on real repos. Customer gains: an enterprise-default decision made on their data, scored on signal-to-noise.",
     "<strong>Expand: Hopper, the Discover migration, Capital One Software.</strong> Teams working in inherited or customer-facing code. Customer gains: blast-radius checks on systems they didn't build. Commercial: usage grows past the commit.",
     "<strong>Standardize: the enterprise default.</strong> ~14,000 technologists under Enterprise Platforms. Customer gains: one independent review layer across Copilot, Claude Code and Windsurf. Commercial: an enterprise agreement; Brex folds in."
   ];
@@ -711,6 +821,17 @@ body.presenting .present-bar{display:flex}
   }
   stageBtns.forEach(function(b){b.addEventListener('click',function(){showStage(b.dataset.stage);});});
   showStage('all');
+
+  // Champion one-pager: audience switch
+  var aud={
+    ciso:"<strong>For the CISO org:</strong> self-hosted inside Capital One's network, code never leaves, custom models allowed. SOC 2 Type II, SSO/SAML and audit logs on the cloud option. It complements VulnHunter: VulnHunter hunts exploits, Greptile reviews every change before merge.",
+    platforms:"<strong>For Enterprise Platforms:</strong> your incidents come from deployments, and change volume is up. Greptile reviews every PR in about three minutes with cross-repo context, at one-pipeline scale, across every coding tool.",
+    finance:"<strong>For finance and procurement:</strong> building and running an internal reviewer costs a team's salaries plus inference every year. Greptile starts at a $25k commit and grows with usage. Brex already pays for it."
+  };
+  var audBtns=document.querySelectorAll('.aud button'), audDetail=document.getElementById('aud-detail');
+  function showAud(k){audBtns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.aud===k));});audDetail.innerHTML=aud[k];}
+  audBtns.forEach(function(b){b.addEventListener('click',function(){showAud(b.dataset.aud);});});
+  showAud('ciso');
 
   // Outbound touches
   document.querySelectorAll('.touches button').forEach(function(b){
