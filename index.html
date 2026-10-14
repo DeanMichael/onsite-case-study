@@ -505,7 +505,7 @@ body.presenting .present-bar{display:flex}
       <div class="file-head"><code>plan/04-what-i-dont-know.md</code><span class="ask">Part 1 · Discovery</span></div>
       <div class="file-body">
         <h3>What I don't know</h3>
-        <p class="q">Four questions for discovery. Pick an answer and see how the plan changes.</p>
+        <p class="q">Five questions for discovery. Pick an answer and see how the plan changes.</p>
         <ul class="qs" id="qs"></ul>
         <div class="plus-layer" aria-label="Expanded detail">
           <div class="diff-row"><span class="gutter">+</span><p><strong>A plan built to be wrong.</strong> Every assumption has a fallback, so a bad answer changes the route instead of killing the deal.</p></div>
@@ -850,6 +850,7 @@ body.presenting .present-bar{display:flex}
     {q:"Is Brex staying on its own tooling after integration?",y:"Expand outward from Brex and use it as the internal reference.",n:"Urgent: get Greptile into DevEx's evaluation now, or lose Brex when it migrates."},
     {q:"Is Copilot code review the AI reviewer in your pipeline today?",y:"Lead with independence: a different model checks what Copilot writes.",n:"It's the in-house reviewer or something else; go to the next question."},
     {q:"Is the in-house MLX reviewer in production with quality metrics?",y:"Propose a head-to-head on their own PRs, judged on signal-to-noise.",n:"Position Greptile as the base they build on; bring the Mixpanel and Coinbase stories."},
+    {q:"Is DevEx measured on review speed this year, more than on incidents?",y:"Lead with Brex's ~30% faster merges.",n:"Lead with defects caught before deploy and Paleja's quote on deployment incidents."},
     {q:"Does DevEx own the AI coding tools budget?",y:"Champion and buyer sit close together; shorter cycle.",n:"Map the path to Paleja's org early; plan for a longer cycle."}
   ];
   var ql=document.getElementById('qs');
