@@ -1,4 +1,4 @@
-# Capital One account plan
+# Add a strategic account plan for Capital One
 
 Greptile AE onsite case study: an enterprise account plan for Capital One, presented as a pull request.
 
@@ -7,7 +7,7 @@ Two deliverables, matching the exercise:
 - **Account plan** (one page): why now, where Greptile fits, who matters, what I don't know, the outbound sequence, and the first meeting.
 - **The presentation** (five slides): how I'd present Greptile to Capital One: the problem, how it works, a live review, proving the value, and winning a champion.
 
-Every part has two layers. **Fundamentals** answers the prompt as written. **Fundamentals + the work** shows what sits under each answer as a diff: the evidence, the method, and the preparation.
+Every part has two views. **Collapsed** answers the prompt as written. **Expanded** adds the evidence, method, and preparation under each answer, shown as a diff.
 
 ## Use it
 
