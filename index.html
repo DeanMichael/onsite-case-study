@@ -46,9 +46,10 @@ a{color:var(--navy)}
 .pr-id{display:flex;flex-direction:column;gap:2px;min-width:0}
 .pr-meta{color:var(--muted);font-size:14px}
 .pr-meta strong{color:var(--add);font-weight:700}
-.spacer{flex:1}
 /* PR tabs: the two deliverables */
-.pr-tabs{max-width:1240px;margin:0 auto;padding:0 24px;display:flex;gap:4px}
+.pr-row{max-width:1240px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pr-tabs{display:flex;gap:4px;align-self:flex-end}
+.pr-actions{margin-left:auto;display:flex;align-items:center;gap:10px;padding:6px 0}
 .pr-tabs a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;color:var(--muted);text-decoration:none;font-weight:600;font-size:15px;border-bottom:2px solid transparent;margin-bottom:-1px}
 .pr-tabs a:hover{color:var(--ink)}
 .pr-tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--add)}
@@ -74,9 +75,9 @@ a{color:var(--navy)}
 body.plus .files .stat{opacity:1}
 
 /* ---------- Opening ---------- */
-.open{grid-column:1/-1;padding:36px 0 8px;max-width:900px}
-.open p.lead{font:800 clamp(30px,4.6vw,58px)/1.02 var(--display);font-stretch:105%;letter-spacing:-.02em;margin:0 0 18px}
-.open p.sub{font-size:19px;color:var(--muted);max-width:62ch;margin:0}
+.open{grid-column:1/-1;padding:28px 0 4px;max-width:760px}
+.open p.lead{font:700 clamp(20px,2.2vw,26px)/1.25 var(--display);font-stretch:105%;letter-spacing:-.01em;margin:0 0 8px}
+.open p.sub{font-size:16px;color:var(--muted);max-width:62ch;margin:0}
 
 /* ---------- File (section) ---------- */
 .file{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:28px;scroll-margin-top:calc(var(--header-h,72px) + 16px);overflow:hidden}
@@ -289,7 +290,7 @@ body.presenting .present-bar{display:flex}
   .file-body{padding:20px 18px 24px}
   .file-head .ask{display:none}
   .pr-inner{gap:12px}
-  .spacer{display:none}
+  .pr-actions{flex-wrap:wrap;margin-left:0;gap:8px}
 }
 @media print{
   @page{size:letter;margin:0.35in}
@@ -345,28 +346,31 @@ body.presenting .present-bar{display:flex}
 <header class="pr">
   <div class="pr-inner">
     <div class="pr-id">
-      <h1 class="pr-title">Capital One account plan <span class="num">#1</span></h1>
+      <h1 class="pr-title">Add a strategic account plan for Capital One <span class="num">#1</span></h1>
       <span class="pr-meta">Dean Sibrizzi wants to merge <strong>1 plan and 5 slides</strong> into Greptile's enterprise motion</span>
     </div>
-    <span class="spacer"></span>
-    <div class="switch" role="group" aria-label="View">
-      <button type="button" data-mode="fund" aria-pressed="true">Collapsed</button>
-      <button type="button" data-mode="plus" aria-pressed="false">Expanded</button>
-    </div>
-    <button type="button" class="btn ghost" id="objections-open">Objections</button>
-    <button type="button" class="btn" id="present">Present</button>
   </div>
-  <nav class="pr-tabs" aria-label="Deliverables">
-    <a href="#plan" data-view="plan" aria-current="page">Account plan <span class="count">1 page</span></a>
-    <a href="#call" data-view="call">The presentation <span class="count">5 slides</span></a>
-  </nav>
+  <div class="pr-row">
+    <nav class="pr-tabs" aria-label="Deliverables">
+      <a href="#plan" data-view="plan" aria-current="page">Account plan <span class="count">1 page</span></a>
+      <a href="#call" data-view="call">The presentation <span class="count">5 slides</span></a>
+    </nav>
+    <div class="pr-actions">
+      <div class="switch" role="group" aria-label="View">
+        <button type="button" data-mode="fund" aria-pressed="true">Collapsed</button>
+        <button type="button" data-mode="plus" aria-pressed="false">Expanded</button>
+      </div>
+      <button type="button" class="btn ghost" id="objections-open">Objections</button>
+      <button type="button" class="btn" id="present">Present</button>
+    </div>
+  </div>
 </header>
 
 <main>
 <div class="wrap view" id="view-plan">
   <section class="open" aria-label="Opening">
-    <p class="lead">The prompt tests sales fundamentals. Here they are, on one page.</p>
-    <p class="sub">Expand any view to see the evidence, method and preparation under every part, shown the way Greptile would show them: as a diff.</p>
+    <p class="lead">How Greptile lands at Capital One and becomes the enterprise default.</p>
+    <p class="sub">Expand to see the evidence and method under every part, shown as a diff.</p>
   </section>
 
   <nav class="files" aria-label="Changed files">

@@ -1,4 +1,4 @@
-# Capital One account plan
+# Add a strategic account plan for Capital One
 
 Greptile AE onsite case study: an enterprise account plan for Capital One, presented as a pull request.
 
