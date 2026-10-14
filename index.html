@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Win Capital One</title>
+<title>Capital One Account Plan</title>
 <meta name="description" content="Greptile AE onsite: an account plan for Capital One, presented as a pull request.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -345,13 +345,13 @@ body.presenting .present-bar{display:flex}
 <header class="pr">
   <div class="pr-inner">
     <div class="pr-id">
-      <h1 class="pr-title">Win Capital One <span class="num">#1</span></h1>
+      <h1 class="pr-title">Capital One account plan <span class="num">#1</span></h1>
       <span class="pr-meta">Dean Sibrizzi wants to merge <strong>1 plan and 5 slides</strong> into Greptile's enterprise motion</span>
     </div>
     <span class="spacer"></span>
     <div class="switch" role="group" aria-label="View">
       <button type="button" data-mode="fund" aria-pressed="true">Fundamentals</button>
-      <button type="button" data-mode="plus" aria-pressed="false">Fundamentals + plus</button>
+      <button type="button" data-mode="plus" aria-pressed="false">Fundamentals + the work</button>
     </div>
     <button type="button" class="btn ghost" id="objections-open">Objections</button>
     <button type="button" class="btn" id="present">Present</button>
@@ -365,8 +365,8 @@ body.presenting .present-bar{display:flex}
 <main>
 <div class="wrap view" id="view-plan">
   <section class="open" aria-label="Opening">
-    <p class="lead">The prompt tests sales fundamentals. Here they are, plus what I'd add.</p>
-    <p class="sub">At the pace AI is moving, fundamentals are the floor. Flip the switch above to see the additions on every part, shown the way Greptile would show them: as a diff.</p>
+    <p class="lead">The prompt tests sales fundamentals. Here they are on one page, with the work behind each one.</p>
+    <p class="sub">Each part reads on its own. Flip the switch above to see the evidence, method and preparation under every part, shown the way Greptile would show them: as a diff.</p>
   </section>
 
   <nav class="files" aria-label="Changed files">
@@ -403,7 +403,7 @@ body.presenting .present-bar{display:flex}
           <li><button type="button"><span class="when">Jul 2026</span> <span class="what">VulnHunter open-sourced; Discover cardholders move into the app</span></button>
             <div class="detail">The CISO org's agentic security scanner went public, and the Discover migration started reaching customers: complaints about logins and missed autopays peaked in early August. <a href="https://capitalone.com/tech/open-source/announcing-vulnhunter/" target="_blank" rel="noopener">Capital One Tech</a> · <a href="https://unstar.app/blog/discover-card-moved-to-capital-one-app-reviews-2026" target="_blank" rel="noopener">Unstar</a></div></li>
         </ol>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Three codebases nobody at Capital One wrote.</strong> Brex, Hopper and Discover all need review by engineers who lack context on the code. That's the problem Greptile's codebase graph solves.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>Security covers exploits; per-PR review is still open.</strong> VulnHunter audits code for ways in. Nothing reviews every change before merge with context across repos.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>Research method.</strong> Built from postings, filings, podcasts and public repos with AI, then checked by hand against the sources.</p></div>
@@ -426,7 +426,7 @@ body.presenting .present-bar{display:flex}
           <button class="step" type="button" aria-pressed="false" aria-controls="step-detail"><span class="k">Standardize</span><span class="n">Enterprise default</span></button>
         </div>
         <div class="step-detail" id="step-detail" aria-live="polite"></div>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Review for code you inherited.</strong> Brex, Hopper and Discover are each a land with its own leader and deadline.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>Evaluate the way they already evaluate.</strong> Public code first, then their AI-tool sandbox on synthetic or anonymized code while security review runs, then self-hosted on real repos. Nothing proprietary leaves the bank until risk signs off.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>A bake-off they already expect.</strong> Capital One's tool funnel is built for head-to-head trials, so we ask for one on their PRs.</p></div>
@@ -489,7 +489,7 @@ body.presenting .present-bar{display:flex}
           <li><strong>Influencer:</strong> Max Kanat-Alexander. <em>*Unnamed: to fill in discovery.</em></li>
         </ul>
         <p class="footnote">Public sources, Oct 2026. Reporting lines below the CIO are likely, not confirmed. Dashed boxes are roles to name in discovery.</p>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Turn the blocker into the ally.</strong> Security usually slows AI tools down; here, the CISO org just shipped one. The security thread starts at stage 1, not stage 4.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>The gaps are the plan.</strong> The dashed boxes are what the first three conversations need to fill.</p></div>
         </div>
@@ -503,7 +503,7 @@ body.presenting .present-bar{display:flex}
         <h3>What I don't know</h3>
         <p class="q">Five questions for discovery. Pick an answer and see how the plan changes.</p>
         <ul class="qs" id="qs"></ul>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>A plan built to be wrong.</strong> Every assumption has a fallback, so a bad answer changes the route instead of killing the deal.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>Ask Greptile first.</strong> What has Brex's account done since April: usage, renewal date, any sign of migration?</p></div>
         </div>
@@ -534,7 +534,7 @@ body.presenting .present-bar{display:flex}
             <div class="msg"><p>Hi Catherine,</p><p>Here's how a head-to-head could fit your AI tool review process: Capital One's public repos first, then your AI sandbox on synthetic or anonymized code while security review runs, and a self-hosted run on real repos only after approval, scored on signal-to-noise against your current reviewer. Your team keeps the data either way.</p><p>Who on your team runs AI tool evaluations? Happy to send them the full design.</p><p>Best,<br>Dean</p></div></li>
         </ol>
         <p class="stack"><strong>Educate before the meeting:</strong> executives get a one-page build-vs-buy on Capital One's posted salary bands plus Brex's numbers; engineers get Greptile's reviews on a public Capital One repo and the free trial.</p>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Review their open source, privately.</strong> Run Greptile on VulnHunter's open PRs and send the findings to its maintainers in the CISO org. Private, because public findings on a security tool read as a gotcha.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>A dinner on reviewing code you didn't write.</strong> Eight to ten people near McLean, hosted with James Reggio, with Max Kanat-Alexander invited to lead the conversation.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>Give where gifts can't go.</strong> For every confirmed issue Greptile finds in Capital One's public repos in 30 days, a donation to coding education, tied to Capital One Coders.</p></div>
@@ -567,7 +567,7 @@ body.presenting .present-bar{display:flex}
           </ul>
         </div>
         <p class="stack"><strong>Agreed next step:</strong> a written evaluation plan that runs alongside security review: results on Capital One's public repos, then a 30-day evaluation in their AI-tool sandbox, then self-hosted on the integration repos once risk approves. Named owner, success criteria, kickoff date. Fallback: a technical session on Capital One's public repos within two weeks.</p>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Confirm, don't ask.</strong> Research turns discovery into checking hypotheses, which frees a third of the meeting for their code.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>Bring Brex into the room.</strong> A peer inside their own company is stronger proof than anything we say about ourselves.</p></div>
         </div>
@@ -606,7 +606,7 @@ body.presenting .present-bar{display:flex}
           <figure><blockquote>"Over 45% of our code changes are now fully written by AI."</blockquote><figcaption>James Reggio, CTO, Brex · <a href="https://cursor.com/customers/upwork" target="_blank" rel="noopener">Cursor</a></figcaption></figure>
           <figure><blockquote>"We need to speed up code review velocity."</blockquote><figcaption>Max Kanat-Alexander, Executive Distinguished Engineer, Capital One · <a href="https://github.com/The-Focus-AI/2025-11-20-ai-engineering-code-summit/blob/main/2025-11-20.md" target="_blank" rel="noopener">AI Engineer Code Summit notes</a></figcaption></figure>
         </div>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>The demo starts here.</strong> I open a pull request on Capital One's code as this slide comes up; Greptile reviews it while we talk, and we read the result on slide 3.</p></div>
         </div>
       </div>
@@ -637,7 +637,7 @@ body.presenting .present-bar{display:flex}
           <li><strong>Deploys where risk wants it:</strong> Greptile Cloud (SOC 2 Type II, SSO/SAML, audit logs) or self-hosted on Docker or Kubernetes, including air-gapped with custom models. Works with GitHub Enterprise Server, GitLab self-managed and Bitbucket Data Center.</li>
         </ul>
         <p class="footnote">Sources: <a href="https://www.greptile.com/docs" target="_blank" rel="noopener">Greptile docs</a> · <a href="https://www.greptile.com/docs/security/selfhost" target="_blank" rel="noopener">self-hosting</a>. Model setup to confirm with an FDE.</p>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>An independent reviewer.</strong> The tool that writes the code shouldn't be the only one checking it. Greptile reviews Copilot, Claude Code and Windsurf output alike.</p></div>
         </div>
       </div>
@@ -666,7 +666,7 @@ body.presenting .present-bar{display:flex}
           <div class="vs-g"><span class="vs-k">Flagged by Greptile, day 1</span><p>"Repository hooks still run." Proposed fix: "Add <code>--setting-sources user</code>."</p><p>"Extra tools remain available." Same diagnosis.</p></div>
         </div>
         <p class="footnote">And a miss, named up front: on PR 9, Greptile didn't catch a table-cell injection a human found. It complements human review; it doesn't replace it.</p>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>A fair replay.</strong> Each PR was replayed at its state before human review, on its original base commit, with a neutral description.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>This site, reviewed too.</strong> Every change to this presentation went through Greptile. On the first PR it caught a P1 bug in presenter mode. <a href="https://github.com/DeanMichael/onsite-case-study/pull/1" target="_blank" rel="noopener">PR #1</a></p></div>
         </div>
@@ -702,7 +702,7 @@ body.presenting .present-bar{display:flex}
         </div>
         <p class="stack"><strong>Peers who tried building:</strong> Mixpanel built a reviewer and found it costly, verbose and too expensive to run on every push. Coinbase, also regulated, builds its own agents but buys its reviewer. <a href="https://www.greptile.com/customers/brex" target="_blank" rel="noopener">Brex</a> · <a href="https://www.greptile.com/customers/mixpanel" target="_blank" rel="noopener">Mixpanel</a> · <a href="https://www.greptile.com/customers/coinbase" target="_blank" rel="noopener">Coinbase</a></p>
         <p class="stack"><strong>How they'd check it themselves:</strong> signal-to-noise (comments acted on versus dismissed), issues caught before merge that humans missed, and time to merge.</p>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>Their own success test.</strong> McGarvey: "If we can't clearly tell whether we've made something better, we probably haven't." The evaluation is built to answer exactly that.</p></div>
         </div>
       </div>
@@ -727,7 +727,7 @@ body.presenting .present-bar{display:flex}
         </div>
         <div class="aud-detail" id="aud-detail" aria-live="polite"></div>
         <p class="stack"><strong>Proof from inside:</strong> Brex's results, an intro to Reggio's team, and the VulnHunter replay, shared privately with the CISO org.</p>
-        <div class="plus-layer" aria-label="Additions">
+        <div class="plus-layer" aria-label="The work behind it">
           <div class="diff-row"><span class="gutter">+</span><p><strong>The champion authors the evaluation.</strong> A well-run evaluation makes them look good whatever the result, which is why they'll carry it.</p></div>
           <div class="diff-row"><span class="gutter">+</span><p><strong>Start where approval already exists.</strong> Brex passed a vendor review for Greptile. Whether it carries over inside a bank is the first thing to confirm.</p></div>
         </div>
@@ -760,7 +760,7 @@ body.presenting .present-bar{display:flex}
 (function(){
   var body=document.body;
 
-  // Fundamentals / plus switch
+  // Fundamentals / the work switch
   document.querySelectorAll('.switch button').forEach(function(b){
     b.addEventListener('click',function(){
       var plus=b.dataset.mode==='plus';
