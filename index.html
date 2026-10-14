@@ -847,11 +847,11 @@ body.presenting .present-bar{display:flex}
 
   // Discovery questions
   var qs=[
-    {q:"Is Brex staying on its own tooling after integration?",y:"Expand outward from Brex and use it as the internal reference.",n:"Urgent: get Greptile into DevEx's evaluation now, or lose Brex when it migrates."},
-    {q:"Is Copilot code review the AI reviewer in your pipeline today?",y:"Lead with independence: a different model checks what Copilot writes.",n:"It's the in-house reviewer or something else; go to the next question."},
-    {q:"Is the in-house MLX reviewer in production with quality metrics?",y:"Propose a head-to-head on their own PRs, judged on signal-to-noise.",n:"Position Greptile as the base they build on; bring the Mixpanel and Coinbase stories."},
+    {q:"Is the next AI coding tool on hold until review capacity catches up?",y:"Greptile is what unblocks their AI rollout: sell it as the prerequisite, not one more tool.",n:"Lead with quality and incidents instead of throughput."},
     {q:"Is DevEx measured on review speed this year, more than on incidents?",y:"Lead with Brex's ~30% faster merges.",n:"Lead with defects caught before deploy and Paleja's quote on deployment incidents."},
-    {q:"Does DevEx own the AI coding tools budget?",y:"Champion and buyer sit close together; shorter cycle.",n:"Map the path to Paleja's org early; plan for a longer cycle."}
+    {q:"Does the in-house reviewer have to beat a vendor before it gets more headcount?",y:"A bake-off is coming: get on the list and help write the scoring.",n:"They're committed to building: position Greptile as the layer under it."},
+    {q:"Do incidents from AI-written code count against Enterprise Platforms' numbers?",y:"Paleja's org owns the pain: sell top-down as an enterprise standard.",n:"Individual teams own it: land team by team through DevEx."},
+    {q:"Will Brex move onto Capital One's engineering standards in the next year?",y:"Brex's Greptile contract is at risk: get into DevEx's evaluation now.",n:"Brex stays the internal reference to expand from."}
   ];
   var ql=document.getElementById('qs');
   qs.forEach(function(item){
